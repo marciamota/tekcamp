@@ -1,4 +1,4 @@
 # This is a heading
 ## This is a subheading
 **This text is bold** 
-**This new text is also bold**
+`this is a line of code`
