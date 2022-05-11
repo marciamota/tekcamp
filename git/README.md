@@ -2,3 +2,4 @@
 ## This is a subheading
 **This text is bold**
 `this is a line of code`
+*This text is italicized*
