@@ -14,6 +14,9 @@ clearErrors = () => {
     fieldInputEmail.nextElementSibling.textContent = 'Email cannot be empty';
 }
 
+/**
+ * This function clears the form data.
+ */
 clearFormData = () => {
     fieldInputUserName.value = '';
     fieldInputLastName.value = '';
