@@ -1,21 +1,29 @@
+import React, { Fragment } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
+
+import Header from './components/Header';
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
+
 function App() {
+
+  // load user profile info (axios)
+  
   return (
-    <div className="ui container comments">
-      <div className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" />
-        </a>
-        <div className="content">
-          <a href="/" className="author">
-            Sam
-          </a>
-          <div className="metadata">
-            <span className="date">Today at 6 p.m.</span>
-          </div>
-          <div className="text">Nice blog post</div>
-        </div>
-      </div>
-    </div>
+    <Fragment>
+      <Header />
+      <Switch>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="*">
+          <Redirect to="/dashboard" />
+        </Route>
+      </Switch>
+    </Fragment>
   );
 }
 
