@@ -23,7 +23,7 @@ const PostCard = () => {
                         <span className="date">Today at 6 p.m.</span>
                     </div>
                     <div className="text">
-                        Nice blog post sjhgfbsajgbhfjhbfghbh h h ub bbniuiuh  biubiu iuhiu 
+                        Nice blog post
                     </div>
                     {/* add likes count somewhere */}
                     <div>

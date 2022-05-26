@@ -5,6 +5,8 @@ const Profile = (props) => {
     return (
         <div>
             Profile
+            {props.userData.firstName}
+            {props.xxx}
         </div>
     );
 };
