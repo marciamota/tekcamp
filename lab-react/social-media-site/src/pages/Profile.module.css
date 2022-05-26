@@ -1,0 +1,8 @@
+.profile {
+    /* margin: 0 auto; */
+    display: flex;
+}
+
+.profile > div:first-of-type{
+    margin: 20px auto;
+}

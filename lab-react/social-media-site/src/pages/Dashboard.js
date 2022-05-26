@@ -39,7 +39,7 @@ const Dashboard = (props) => {
     }
   }, [posts]);
 
-  const postsCard = posts.map((singlePost) => <PostCard postData={singlePost} userId={userId}/>);
+  const postsCard = posts.map((singlePost) => <PostCard key={singlePost.id} postData={singlePost} userId={userId}/>);
   const noPostsFound = <div><p>No posts found.</p></div>;
 
   // load list of post

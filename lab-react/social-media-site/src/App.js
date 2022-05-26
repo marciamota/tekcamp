@@ -61,31 +61,6 @@ function App() {
   useEffect(() => {
     if (userData.status !== "ok") {
       getUserData();
-
-      // axios.get('https://dummyapi.io/data/v1/user/60d0fe4f5311236168a109ca', {
-      //   headers: {
-      //     'app-id': '628c349e8a3a1d57ffc8437f'
-      //   }
-      // }).then((response) => {
-      //   if (response && response.data) {
-      //     const userInfo = {
-      //       firstName: response.data.firstName,
-      //       lastName: response.data.lastName,
-      //       gender: response.data.gender,
-      //       dateOfBirth: response.data.dateOfBirth,
-      //       city: response.data.location.city,
-      //       state: response.data.location.state,
-      //       country: response.data.location.country,
-      //     };
-      //     setUserData(userInfo);
-      //   } else {
-      //     setFetchUserDataFailed(true);
-      //     setUserData('error');
-      //   }
-      // }).catch((error) => {
-      //   setFetchUserDataFailed(true);
-      //   setUserData('error');
-      // });
     }
   }, [userData]);
 
