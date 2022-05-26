@@ -6,10 +6,11 @@ import Header from './components/Header';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import Loader from './components/Loader';
-import UserDataError from './components/UserDataError';
+import FetchDataError from './components/FetchDataError';
 
 function App() {
   const [userData, setUserData] = useState({
+    // id: "",
     firstName: "",
     lastName: "",
     gender: "",
@@ -28,6 +29,7 @@ function App() {
       })
       if (response && response.data) {
         const userInfo = {
+          // id: response.data.id,
           firstName: response.data.firstName,
           lastName: response.data.lastName,
           gender: response.data.gender,
@@ -99,7 +101,7 @@ function App() {
             userData.status === "empty" ?
               <Loader /> :
               userData.status === "error" ?
-                <UserDataError /> :
+                <FetchDataError /> :
                 <Profile userData={userData} />
           }
         </Route>

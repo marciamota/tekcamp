@@ -1,9 +1,13 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import PostCard from '../components/PostCard';
+import FetchDataError from '../components/FetchDataError';
+import Loader from '../components/Loader';
   
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
+  const [postsError, setPostsError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const firstRun = useRef(true);
 
   const getPosts = async () => {
@@ -14,24 +18,19 @@ const Dashboard = () => {
         }
       })
       if (response && response.data && response.data.data) {
-
         setPosts(response.data.data);
       } else {
-
-        // setUserData();
+        setPostsError(true);
       }
     } catch (error) {
-      // const userInfo = {
-      //   ...userData,
-      //   status: "error",
-      // };
-      // setUserData(userInfo);
-      console.log(error);
+      setPostsError(true);
+    } finally {
+      setLoading(false);
     }
 
   }
 
-  // load user profile info (axios)
+  // load posts info (axios)
   useEffect(() => {
     if (posts.length === 0 && firstRun.current) {
       firstRun.current = false;
@@ -39,10 +38,13 @@ const Dashboard = () => {
     }
   }, [posts]);
 
+  const postsCard = posts.map((singlePost) => <PostCard postData={singlePost}/>);
+  const noPostsFound = <div><p>No posts found.</p></div>;
+
   // load list of post
   return (
       <div>
-        {posts.map((singlePost) => <PostCard postData={singlePost}/>)}
+        {loading ? <Loader /> : postsError ? <FetchDataError /> : posts.length ? postsCard : noPostsFound}
       </div>
   );
 };
