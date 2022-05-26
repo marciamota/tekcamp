@@ -7,7 +7,7 @@ const PostCard = (props) => {
     const [showComments, setShowComments] = useState(false);
     const [commentsError, setCommentsError] = useState(false);
     const [loading, setLoading] = useState(true);
-    // const userId = props.userId;
+    const userId = props.userId;
 
     const data = props.postData;
     const seeCommentsHandler = async () => {
@@ -36,12 +36,6 @@ const PostCard = (props) => {
             }
         }
 
-
-        //fetch comments for this post
-        // const getPosts = async () => {
-        
-
-        //   }
     };
 
     const addCommentsHandler = () => {
@@ -73,6 +67,7 @@ const PostCard = (props) => {
                     </div>
                     <div className="metadata">
                         <span className="date">{new Date(data.publishDate).toDateString()}</span>
+                        <span>add likes count</span>
                     </div>
                     {/* add likes count somewhere */}
                     <div>

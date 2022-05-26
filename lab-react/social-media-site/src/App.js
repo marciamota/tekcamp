@@ -10,7 +10,7 @@ import FetchDataError from './components/FetchDataError';
 
 function App() {
   const [userData, setUserData] = useState({
-    // id: "",
+    id: "",
     firstName: "",
     lastName: "",
     gender: "",
@@ -29,7 +29,7 @@ function App() {
       })
       if (response && response.data) {
         const userInfo = {
-          // id: response.data.id,
+          id: response.data.id,
           firstName: response.data.firstName,
           lastName: response.data.lastName,
           gender: response.data.gender,
@@ -94,7 +94,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/dashboard">
-          <Dashboard />
+          <Dashboard userId={userData.id}/>
         </Route>
         <Route path="/profile">
           {

@@ -4,11 +4,12 @@ import PostCard from '../components/PostCard';
 import FetchDataError from '../components/FetchDataError';
 import Loader from '../components/Loader';
   
-const Dashboard = () => {
+const Dashboard = (props) => {
   const [posts, setPosts] = useState([]);
   const [postsError, setPostsError] = useState(false);
   const [loading, setLoading] = useState(true);
   const firstRun = useRef(true);
+  const userId = props.userId;
 
   const getPosts = async () => {
     try {
@@ -38,13 +39,18 @@ const Dashboard = () => {
     }
   }, [posts]);
 
-  const postsCard = posts.map((singlePost) => <PostCard postData={singlePost}/>);
+  const postsCard = posts.map((singlePost) => <PostCard postData={singlePost} userId={userId}/>);
   const noPostsFound = <div><p>No posts found.</p></div>;
 
   // load list of post
   return (
       <div>
-        {loading ? <Loader /> : postsError ? <FetchDataError /> : posts.length ? postsCard : noPostsFound}
+        {
+          loading ? <Loader /> : 
+          postsError ? <FetchDataError /> : 
+          posts.length ? postsCard : 
+          noPostsFound
+        }
       </div>
   );
 };
