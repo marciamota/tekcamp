@@ -20,6 +20,7 @@ function App() {
     country: "",
     status: "empty",
   });
+  
   const getUserData = async () => {
     try {
       const response = await axios.get('https://dummyapi.io/data/v1/user/60d0fe4f5311236168a109ca', {
