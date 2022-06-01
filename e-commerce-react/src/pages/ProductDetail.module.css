@@ -1,0 +1,35 @@
+.column {
+    display: flex;
+}
+
+
+.flex-columns .row { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.flex-columns .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.flex-columns .column .column-1,
+.flex-columns .column .column-2 bg-primary{
+    height: 100%;
+}
+
+.flex-columns .column .column-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-secondary {
+    color: #175029;
+}
