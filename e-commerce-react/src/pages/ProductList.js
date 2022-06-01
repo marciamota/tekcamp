@@ -1,30 +1,16 @@
-import React from 'react';
-import axios from 'axios';
-// import classes from './Loader.module.css';
+import React, { Fragment } from 'react';
 
-const ProductList = () => {
+import classes from './ProductList.module.css';
 
-    const getProducts = async () => {
-        try {
-          const response = await axios.get('https://dummyapi.io/data/v1/post?limit=15', {
-            headers: {
-              'app-id': '628c349e8a3a1d57ffc8437f'
-            }
-          })
-          if (response && response.data && response.data.data) {
-            // setPosts(response.data.data);
-          } else {
-            // setPostsError(true);
-          }
-        } catch (error) {
-        //   setPostsError(true);
-        } finally {
-        //   setLoading(false);
-        }
-      }
+import ProductCard from '../components/ProductCard';
+
+const ProductList = (props) => {
+
+    const productCards = props.productList.map((singleProduct) => <ProductCard key={singleProduct.id} data={singleProduct}/>);
+
     return (
-        <div>
-            Product List
+        <div className={'ui cards ' + classes.productrow}>
+            {productCards}
         </div>
     );
 };

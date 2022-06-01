@@ -7,3 +7,7 @@
 .smaller {
     margin: 5px;
 }
+
+.nomargin {
+    margin-bottom: 0px;
+}

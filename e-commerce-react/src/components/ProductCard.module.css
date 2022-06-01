@@ -1,0 +1,12 @@
+.cardbutton {
+    margin: 0 0 10px 10px;
+}
+
+.customcard {
+    height: 550px;
+    margin: 5px !important;
+}
+
+.customcard >div:first-child {
+    background-color: white;
+}
