@@ -17,7 +17,7 @@ const Header = () => {
                 <NavLink to='/shopping-cart' className='item'>
                     Shopping Cart <i className="shopping cart icon"></i>
                 </NavLink>
-                <NavLink to='/login-page' className='item'>
+                <NavLink to='/manage-store' className='item'>
                     Manage Store
                 </NavLink>
                 <NavLink to='/login-page' className='item'>
