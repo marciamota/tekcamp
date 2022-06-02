@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header = (props) => {
+    // const [filterTerm, setFilterTerm] = useState("");
+    const filterTerm = useRef("");
+    const filterHandler = () => {
+        const searchTerm = filterTerm.current.value;
+        const filteredProducts = props.productList.filter((product) => {
+            return product.title.toUpperCase().includes(searchTerm.toUpperCase()) || 
+                product.category.toUpperCase().includes(searchTerm.toUpperCase());
+        });
+        props.setProducts(filteredProducts);
+    }
+
     return (
         <div className={"ui stackable menu"}>
             <h1 className={classes.companyname}>Marcia's E-Commerce</h1>
             <div className='right menu'>
                 <div className={"ui mini icon input " + classes.smaller} >
                     <i className="search icon"></i>
-                    <input type="text" placeholder="Search..." />
+                    <input type="search" placeholder="Filter Name or Category" onChange={filterHandler} ref={filterTerm} />
                 </div>
                 <NavLink to='/products' className='item'>
                     Products

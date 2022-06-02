@@ -16,6 +16,7 @@ import Header from './components/Header';
 function App() {
   // to prevent useEffect from calling the api more than once
   const firstRun = useRef(true);
+  const [originalProducts, setOriginalProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([
     { productId: 1, quantity: 2, price: 44.44, name: "something", available: 3 },
@@ -32,6 +33,7 @@ function App() {
   useEffect(() => {
     if (products.length === 0 && firstRun.current) {
       firstRun.current = false;
+      setOriginalProducts(data);
       setProducts(data);
       setLoading(false);
     }
@@ -39,12 +41,12 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header productList={originalProducts} setProducts={setProducts}/>
       {
         loading ? <Loader /> :
           <Switch>
             <Route path="/products/:id" >
-              <ProductDetail productList={products} />
+              <ProductDetail productList={originalProducts} />
             </Route>
             <Route path="/products">
               <ProductList productList={products} />
@@ -53,7 +55,7 @@ function App() {
               <ShoppingCart cart={cart} modifyCart={setCart} />
             </Route>
             <Route path="/manage-store">
-              <ManagePage productList={products} />
+              <ManagePage productList={originalProducts} />
             </Route>
             <Route path="/login-page">
               <LoginPage />
