@@ -9,6 +9,7 @@ import Loader from './components/Loader';
 // import FetchDataError from './components/FetchDataError';
 import data from './resources/products.json';
 // import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 
 import Header from './components/Header';
 
@@ -51,9 +52,9 @@ function App() {
             <Route path="/shopping-cart">
               <ShoppingCart cart={cart} modifyCart={setCart} />
             </Route>
-            {/* <Route path="/test">
-              <div className="container">test</div>
-            </Route> */}
+            <Route path="/login-page">
+              <LoginPage />
+            </Route>
             <Route path="*">
               <Redirect to="/products" />
             </Route>
