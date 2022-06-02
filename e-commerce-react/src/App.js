@@ -6,7 +6,7 @@ import ProductDetail from './pages/ProductDetail';
 import ProductList from './pages/ProductList';
 import ShoppingCart from './pages/ShoppingCart';
 import Loader from './components/Loader';
-import FetchDataError from './components/FetchDataError';
+// import FetchDataError from './components/FetchDataError';
 import data from './resources/products.json';
 // import Login from './pages/Login';
 
@@ -17,14 +17,14 @@ function App() {
   const firstRun = useRef(true);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([
-    {productId: 1, quantity: 2, price: 44.44, name: "something", available: 3},
-    {productId: 2, quantity: 5, price: 44.44, name: "something", available: 3}
+    { productId: 1, quantity: 2, price: 44.44, name: "something", available: 3 },
+    { productId: 2, quantity: 5, price: 44.44, name: "something", available: 3 }
   ]);
   // [
   //   {productId: 1, quantity: 2, price: 44.44, name: something, available: 3},
   //   {productId: 2, quantity: 5, price: 44.44, name: something, available: 3}
   // ]
-  const [fetchError, setFetchError] = useState(false);
+  // const [fetchError, setFetchError] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // load posts info (axios)
@@ -41,24 +41,23 @@ function App() {
       <Header />
       {
         loading ? <Loader /> :
-          fetchError ? <FetchDataError /> :
-            <Switch>
-              {/* <Route path="/login">
-                <Login />
-              </Route> */}
-              <Route path="/products/:id" >
-                <ProductDetail productList={products} />
-              </Route>
-              <Route path="/products">
-                <ProductList productList={products} />
-              </Route>
-              <Route path="/shopping-cart">
-                <ShoppingCart cart={cart} modifyCart={setCart}/>
-              </Route>
-              <Route path="*">
-                <Redirect to="/products" />
-              </Route>
-            </Switch>
+          <Switch>
+            <Route path="/products/:id" >
+              <ProductDetail productList={products} />
+            </Route>
+            <Route path="/products">
+              <ProductList productList={products} />
+            </Route>
+            <Route path="/shopping-cart">
+              <ShoppingCart cart={cart} modifyCart={setCart} />
+            </Route>
+            {/* <Route path="/test">
+              <div className="container">test</div>
+            </Route> */}
+            <Route path="*">
+              <Redirect to="/products" />
+            </Route>
+          </Switch>
       }
     </div>
   );
