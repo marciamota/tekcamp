@@ -19,15 +19,46 @@ function App() {
   const [originalProducts, setOriginalProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([
-    { productId: 1, quantity: 2, price: 44.44, name: "something", available: 3 },
-    { productId: 2, quantity: 5, price: 44.44, name: "something", available: 3 }
+    { productId: 1, quantity: 2},
   ]);
-  // [
-  //   {productId: 1, quantity: 2, price: 44.44, name: something, available: 3},
-  //   {productId: 2, quantity: 5, price: 44.44, name: something, available: 3}
-  // ]
-  // const [fetchError, setFetchError] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const updateCart = (id, action) => {
+    // make a copy of cart and originalProducts
+    const cartCopy = [...cart];
+    const originalProductsCopy = [...originalProducts];
+
+    // find if the added item already exist in the cart
+    let itemInCartIndex = cartCopy.findIndex((item) => {
+      return item.productId == id;
+    });
+
+    // find the index of the added item in the original products array
+    let originalProductsIndex = originalProducts.findIndex((item) => {
+      return item.id == id;
+    });
+
+    if (action === "increment") {
+      // reduce the availble quantity by 1
+      originalProductsCopy[originalProductsIndex].available--;
+      setOriginalProducts(originalProductsCopy);
+      // increase cart quantity or add to cart
+      if (itemInCartIndex != -1) {
+        // if the added item exist in the cart then increase its quantity by 1
+        cartCopy[itemInCartIndex].quantity++;
+      } else {
+        // if item is not yet in the cart then add it to the cart
+        cartCopy.push({ productId: id,  quantity: 1 });
+      }
+      setCart(cartCopy);
+    } else {
+      // increase the availble quantity by 1
+      originalProductsCopy[originalProductsIndex].available++;
+      setOriginalProducts(originalProductsCopy);
+      cartCopy[itemInCartIndex].quantity--;
+    }
+    console.log('wait')
+  };
 
   // load posts info (axios)
   useEffect(() => {
@@ -49,10 +80,10 @@ function App() {
               <ProductDetail productList={originalProducts} />
             </Route>
             <Route path="/products">
-              <ProductList productList={products} />
+              <ProductList productList={products} updateCart={updateCart}/>
             </Route>
             <Route path="/shopping-cart">
-              <ShoppingCart cart={cart} modifyCart={setCart} />
+              <ShoppingCart cart={cart} modifyCart={setCart} productList={originalProducts} />
             </Route>
             <Route path="/manage-store">
               <ManagePage productList={originalProducts} />

@@ -27,7 +27,7 @@
         },
         "serial_number": "fjed",
         "manufacturer": "Joy",
-        "available": 10
+        "available": 0
     },
     {
         "id": 3,
@@ -147,6 +147,6 @@
         },
         "serial_number": "lrtj",
         "manufacturer": "Akon",
-        "available": 0
+        "available": 1
     }
 ]

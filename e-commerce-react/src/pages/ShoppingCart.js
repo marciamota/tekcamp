@@ -3,6 +3,21 @@ import classes from './ShoppingCart.module.css';
 import EmptyCart from '../components/EmptyCart';
 
 const ShoppingCart = (props) => {
+    // make a copy of the cart
+    const cartInfo = [...props.cart];
+
+    // complete cart info, add price and name
+    for (let cartItem of cartInfo) {
+        const itemInfo = props.productList.find((product) => product.id == cartItem.productId);
+        cartItem.name = itemInfo.title;
+        cartItem.price = itemInfo.price;
+    };
+
+    // calculate total price
+    let totalPrice = 0;
+    for (const cartItem of cartInfo) {
+        totalPrice += +cartItem.price * cartItem.quantity;
+    }
 
     const isEmptyCart = props.cart.length === 0;
 
@@ -14,12 +29,11 @@ const ShoppingCart = (props) => {
         // to do 
     };
 
-    let totalPrice = 0;
-    for (const cartItem of props.cart) {
-        totalPrice += +cartItem.price * cartItem.quantity;
-    }
-
     const itemRows = props.cart.map((item) => {
+        if (item.quantity == 0) {
+            return;
+        }
+        
         return (
             <tr key={item.productId}>
                 <td data-label="ITEM">
