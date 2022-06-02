@@ -49,7 +49,40 @@ const ManagePage = (props) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="column">C2</div>
+                <div className="column">
+                <form className="ui form">
+                            <h1>Add Product</h1>
+                            <div className="field">
+                                <label>Name</label>
+                                <input type="text" placeholder="Name"/>
+                            </div>
+                            <div className="field">
+                                <label>Serial Number</label>
+                                <input type="text" placeholder="00000"/>
+                            </div>
+                            <div className="field">
+                                <label>Price</label>
+                                <input type="number" placeholder="00.00"/>
+                            </div>
+                            <div className="field">
+                                <label>Manufacturer</label>
+                                <input type="text" placeholder="manufacturer"/>
+                            </div>
+                            <div className="field">
+                                <label>Category</label>
+                                <input type="text" placeholder="category"/>
+                            </div>
+                            <div className="field">
+                                <label>Quantity</label>
+                                <input type="number" placeholder="0"/>
+                            </div>
+                            <div className="field">
+                                <label>Product Image</label>
+                                <input type="url" placeholder="product image"/>
+                            </div>
+                            <button className="ui button" type="submit">Add Product</button>
+                        </form>
+                </div>
             </div>
         </div>
     )
