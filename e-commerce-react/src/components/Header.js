@@ -18,6 +18,9 @@ const Header = () => {
                     Shopping Cart <i className="shopping cart icon"></i>
                 </NavLink>
                 <NavLink to='/login-page' className='item'>
+                    Manage Store
+                </NavLink>
+                <NavLink to='/login-page' className='item'>
                     Login
                 </NavLink>
             </div>
