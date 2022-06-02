@@ -1,0 +1,13 @@
+.divInput {
+    max-width: 80px;
+}
+
+.shortInput {
+    text-align: end !important;
+    padding: 2px 5px 2px 5px !important;
+    /* padding-right: 5px !important; */
+}
+
+.quantityControl {
+    display: flex;
+}
