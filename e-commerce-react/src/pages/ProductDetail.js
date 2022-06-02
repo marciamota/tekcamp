@@ -28,9 +28,9 @@ const ProductDetail = (props) => {
                 <p>Serial Number: {product.serial_number}</p>
                 <p>Manufacturer: {product.manufacturer}</p>
                 <p>Available: {product.available}</p>
-                <button className="ui basic button" onClick={addToCartHandler}>
+                <button className="ui basic button" onClick={addToCartHandler} disabled={product.available < 1}>
                     <i className="shopping cart icon"></i>
-                    Add To Cart
+                    {product.available < 1 ? "Sold out" : "Add to cart"}
                 </button>
             </div>
         </div>
