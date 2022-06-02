@@ -10,7 +10,7 @@ import Loader from './components/Loader';
 import data from './resources/products.json';
 // import Login from './pages/Login';
 import LoginPage from './pages/LoginPage';
-
+import ManagePage from './pages/ManagePage';
 import Header from './components/Header';
 
 function App() {
