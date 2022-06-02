@@ -21,7 +21,7 @@ const ShoppingCart = (props) => {
 
     const itemRows = props.cart.map((item) => {
         return (
-            <tr>
+            <tr key={item.productId}>
                 <td data-label="ITEM">
                     {item.name}
                 </td>
@@ -53,7 +53,7 @@ const ShoppingCart = (props) => {
                     <div className="column">
                         <table className="ui striped table">
                             <thead>
-                                <tr>
+                                <tr key="header">
                                     <th className='ten wide'>ITEM</th>
                                     <th className='four wide'>QTY</th>
                                     <th className='two wide'>PRICE</th>
@@ -61,7 +61,7 @@ const ShoppingCart = (props) => {
                             </thead>
                             <tbody>
                                 {itemRows}
-                                <tr>
+                                <tr key="total">
                                     <td data-label="ITEM">
                                         TOTAL
                                     </td>

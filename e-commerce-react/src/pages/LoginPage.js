@@ -13,11 +13,11 @@ const LoginPage = (props) => {
                         <label>User Name</label>
                         <input type="text" placeholder="User Name" />
                     </div>
-                    <div class="field">
+                    <div className="field">
                         <label>Password</label>
                         <input type="password" placeholder="Password" />
                     </div>
-                    <button class="ui button" type="submit">Login</button>
+                    <button className="ui button" type="submit">Login</button>
                 </form>
             </div>
         </div>
