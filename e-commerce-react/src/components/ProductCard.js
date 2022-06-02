@@ -4,7 +4,6 @@ import classes from './ProductCard.module.css';
 
 const ProductCard = (props) => {
     const addToCartHandler = () => {
-        // to do 
         props.updateCart(props.data.id, "increment");
     };
 

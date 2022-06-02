@@ -9,7 +9,7 @@ const ProductDetail = (props) => {
     const product = props.productList.find((singleProduct) => singleProduct.id == id);
 
     const addToCartHandler = () => {
-        // to do 
+        props.updateCart(id, "increment");
     };
 
     return (
