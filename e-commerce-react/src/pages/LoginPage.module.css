@@ -1,6 +1,11 @@
-.productrow {
+/* .productrow {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-left: 10px !important;
+} */
+
+.containerWidth {
+    max-width: 500px;
+    margin: auto;
 }
