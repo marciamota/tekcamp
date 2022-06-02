@@ -11,6 +11,9 @@ const Header = () => {
                     <i className="search icon"></i>
                     <input type="text" placeholder="Search..." />
                 </div>
+                <NavLink to='/products' className='item'>
+                    Products
+                </NavLink>
                 <NavLink to='/shopping-cart' className='item'>
                     Shopping Cart <i className="shopping cart icon"></i>
                 </NavLink>

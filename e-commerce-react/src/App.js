@@ -37,7 +37,7 @@ function App() {
   }, [products]);
 
   return (
-    <div className={classes.appcontainer}>
+    <div>
       <Header />
       {
         loading ? <Loader /> :
