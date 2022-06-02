@@ -53,7 +53,7 @@ function App() {
               <ShoppingCart cart={cart} modifyCart={setCart} />
             </Route>
             <Route path="/manage-store">
-              <ProductList productList={products} />
+              <ManagePage />
             </Route>
             <Route path="/login-page">
               <LoginPage />
