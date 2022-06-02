@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import classes from './App.module.css';
+// import classes from './App.module.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import ProductDetail from './pages/ProductDetail';
@@ -53,7 +53,7 @@ function App() {
               <ShoppingCart cart={cart} modifyCart={setCart} />
             </Route>
             <Route path="/manage-store">
-              <ManagePage />
+              <ManagePage productList={products} />
             </Route>
             <Route path="/login-page">
               <LoginPage />
