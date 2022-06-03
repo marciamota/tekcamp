@@ -23,6 +23,10 @@ function App() {
   ]);
   const [loading, setLoading] = useState(true);
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const updateCart = (id, action) => {
     // make a copy of cart and originalProducts
     const cartCopy = [...cart];
@@ -82,7 +86,12 @@ function App() {
               <ProductList productList={products} updateCart={updateCart}/>
             </Route>
             <Route path="/shopping-cart">
-              <ShoppingCart cart={cart} modifyCart={setCart} productList={originalProducts} updateCart={updateCart}/>
+              <ShoppingCart 
+                cart={cart} 
+                modifyCart={setCart} 
+                productList={originalProducts} 
+                updateCart={updateCart}
+                clearCart={clearCart}/>
             </Route>
             <Route path="/manage-store">
               <ManagePage productList={originalProducts} />
