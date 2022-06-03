@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react';
 
 const ManagePage = (props) => {
-    const removeProductHandler = () => {
+    const removeProductHandler = (id) => {
+        const updatedList = props.productList.filter((product) => product.id != id);
+        props.setOriginalProducts(updatedList); 
+        props.setProducts(updatedList); 
+    };
+    const editProductHandler = (id) => {
         // to do 
     };
-    const editProductHandler = () => {
+    const addProductHandler = () => {
         // to do 
     };
 
@@ -18,12 +23,12 @@ const ManagePage = (props) => {
                     {product.title}
                 </td>
                 <td data-label="EDIT">
-                    <button className="ui icon button" onClick={editProductHandler}>
+                    <button className="ui icon button" onClick={() => editProductHandler(product.id)}>
                         <i className="edit icon"></i>
                     </button>
                 </td>
                 <td data-label="DELETE">
-                    <button className="ui icon button" onClick={removeProductHandler}>
+                    <button className="ui icon button" onClick={() => removeProductHandler(product.id)}>
                         <i className="trash icon"></i>
                     </button>
                 </td>

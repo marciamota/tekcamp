@@ -18,9 +18,7 @@ function App() {
   const firstRun = useRef(true);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([
-    // { productId: 1, quantity: 2},
-  ]);
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const clearCart = () => {
@@ -71,7 +69,7 @@ function App() {
       setProducts(data);
       setLoading(false);
     }
-  }, [products]);
+  }, []);
 
   return (
     <div>
@@ -94,7 +92,10 @@ function App() {
                 clearCart={clearCart}/>
             </Route>
             <Route path="/manage-store">
-              <ManagePage productList={originalProducts} />
+              <ManagePage 
+                productList={originalProducts} 
+                setOriginalProducts={setOriginalProducts}
+                setProducts={setProducts}/>
             </Route>
             <Route path="/login-page">
               <LoginPage />
