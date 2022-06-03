@@ -11,22 +11,25 @@ const ShoppingCart = (props) => {
         const itemInfo = props.productList.find((product) => product.id == cartItem.productId);
         cartItem.name = itemInfo.title;
         cartItem.price = itemInfo.price;
+        cartItem.available = itemInfo.available;
     };
 
     // calculate total price
     let totalPrice = 0;
+    let totalItems = 0;
     for (const cartItem of cartInfo) {
         totalPrice += +cartItem.price * cartItem.quantity;
+        totalItems += cartItem.quantity;
     }
 
-    const isEmptyCart = props.cart.length === 0;
+    const isEmptyCart = totalItems === 0;
 
-    const reduceQuantityHandler = () => {
-        // to do 
+    const reduceQuantityHandler = (id) => {
+        props.updateCart(id, "decrement");
     };
 
-    const increaseQuantityHandler = () => {
-        // to do 
+    const increaseQuantityHandler = (id) => {
+        props.updateCart(id, "increment");
     };
 
     const itemRows = props.cart.map((item) => {
@@ -42,13 +45,18 @@ const ShoppingCart = (props) => {
                 <td data-label="QTY">
                     <div className={classes.quantityControl}>
                     {/* <div> */}
-                        <button className="ui compact icon button" onClick={reduceQuantityHandler}>
+                        <button 
+                            className="ui compact icon button" 
+                            onClick={() => (reduceQuantityHandler(item.productId))}>
                             -
                         </button>
                         <div className={"ui mini icon input " + classes.divInput}>
                             <input type="number" disabled value={item.quantity} className={classes.shortInput} />
                         </div>
-                        <button className="ui compact icon button" onClick={increaseQuantityHandler}>
+                        <button 
+                            className="ui compact icon button" 
+                            onClick={() => (increaseQuantityHandler(item.productId))} 
+                            disabled={item.available < 1}>
                             +
                         </button>
                     </div>

@@ -19,7 +19,7 @@ function App() {
   const [originalProducts, setOriginalProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([
-    { productId: 1, quantity: 2},
+    // { productId: 1, quantity: 2},
   ]);
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +57,6 @@ function App() {
       setOriginalProducts(originalProductsCopy);
       cartCopy[itemInCartIndex].quantity--;
     }
-    console.log('wait')
   };
 
   // load posts info (axios)
@@ -83,7 +82,7 @@ function App() {
               <ProductList productList={products} updateCart={updateCart}/>
             </Route>
             <Route path="/shopping-cart">
-              <ShoppingCart cart={cart} modifyCart={setCart} productList={originalProducts} />
+              <ShoppingCart cart={cart} modifyCart={setCart} productList={originalProducts} updateCart={updateCart}/>
             </Route>
             <Route path="/manage-store">
               <ManagePage productList={originalProducts} />
