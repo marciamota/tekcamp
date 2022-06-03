@@ -6,6 +6,7 @@ import CartSubmitted from '../components/CartSubmitted';
 const cardPattern = /^[0-9]{16}$/;
 const zipPattern = /^[0-9]{5}$/;
 const cvvPattern = /^[0-9]{3}$/;
+const phonePattern = /^[0-9]{10}$/;
 
 const ShoppingCart = (props) => {
     const nameRef = useRef("");
@@ -18,6 +19,19 @@ const ShoppingCart = (props) => {
     const [cvvError, setCvvError] = useState(false);
     const [cartSubmitted, setCartSubmitted] = useState(false);
 
+    const shippingNameRef = useRef("");
+    const addressRef = useRef("");
+    const cityRef = useRef("");
+    const stateRef = useRef("");
+    const shippingZipRef = useRef("");
+    const phoneRef = useRef("");
+    const [shippingNameError, setshippingNameError] = useState(false);
+    const [addressError, setAddressError] = useState(false);
+    const [cityError, setCityError] = useState(false);
+    const [stateError, setStateError] = useState(false);
+    const [shippingZipError, setShippingZipError] = useState(false);
+    const [phoneError, setPhoneError] = useState(false);
+
 
     const submitOrderHandler = (e) => {
         e.preventDefault();
@@ -25,6 +39,14 @@ const ShoppingCart = (props) => {
         const zip = zipRef.current.value;
         const cardNumber = cardNumberRef.current.value;
         const cvv = cvvRef.current.value;
+        const shippingName = shippingNameRef.current.value;
+        const address = addressRef.current.value;
+        const city = cityRef.current.value;
+        const state = stateRef.current.value;
+        const shippingZip = shippingZipRef.current.value;
+        const phone = phoneRef.current.value;
+
+    
 
         let errorsFound = false;
 
@@ -54,6 +76,48 @@ const ShoppingCart = (props) => {
             errorsFound = true;
         } else {
             setCvvError(false);
+        }
+
+        if (!shippingName || shippingName.length === 0) {
+            setshippingNameError(true);
+            errorsFound = true;
+        } else {
+            setshippingNameError(false);
+        }
+        
+        if (!address || address.length === 0) {
+            setAddressError(true);
+            errorsFound = true;
+        } else {
+            setAddressError(false);
+        }
+
+        if (!city || city.length === 0) {
+            setCityError(true);
+            errorsFound = true;
+        } else {
+            setCityError(false);
+        }
+
+        if (!state || state.length === 0) {
+            setStateError(true);
+            errorsFound = true;
+        } else {
+            setStateError(false);
+        }
+
+        if (!shippingZip.match(zipPattern)) {
+            setShippingZipError(true);
+            errorsFound = true;
+        } else {
+            setShippingZipError(false);
+        }
+
+        if (!phone.match(phonePattern)) {
+            setPhoneError(true);
+            errorsFound = true;
+        } else {
+            setPhoneError(false);
         }
 
         if (!errorsFound) {
@@ -182,29 +246,34 @@ const ShoppingCart = (props) => {
                                 <hr/>
                                 <h1>Shipping Address</h1>
                                 <div className="field">
-                                    <label>Name and Last Name</label>
-                                    <input type="text" placeholder="Name and Last Name" ref={nameRef} />
-                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Full Name" ref={shippingNameRef} />
+                                    {shippingNameError && <p className={classes.errorMessage}>Enter a name</p>}
                                 </div>
                                 <div className="field">
                                     <label>Address</label>
-                                    <input type="text" placeholder="Street Address" ref={nameRef} />
-                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                    <input type="text" placeholder="Street Address" ref={addressRef} />
+                                    {addressError && <p className={classes.errorMessage}>Enter an address</p>}
                                 </div>
                                 <div className="field">
-                                    <label>City and State</label>
-                                    <input type="text" placeholder="City and State" ref={nameRef} />
-                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                    <label>City</label>
+                                    <input type="text" placeholder="City" ref={cityRef} />
+                                    {cityError && <p className={classes.errorMessage}>Enter a city</p>}
+                                </div>
+                                <div className="field">
+                                    <label>State</label>
+                                    <input type="text" placeholder="State" ref={stateRef} />
+                                    {stateError && <p className={classes.errorMessage}>Enter a state</p>}
                                 </div>
                                 <div className="field">
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip Code" ref={nameRef} />
-                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                    <input type="text" placeholder="Zip Code" ref={shippingZipRef} />
+                                    {shippingZipError && <p className={classes.errorMessage}>Enter a zip code</p>}
                                 </div>
                                 <div className="field">
                                     <label>Phone Number</label>
-                                    <input type="text" placeholder="Phone Number" ref={nameRef} />
-                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                    <input type="text" placeholder="Phone Number" ref={phoneRef} />
+                                    {phoneError && <p className={classes.errorMessage}>Enter a phone</p>}
                                 </div>
                                 <button className="ui button" type="submit">Submit Order</button>
                             </form>
