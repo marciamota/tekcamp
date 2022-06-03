@@ -25,6 +25,7 @@ const ShoppingCart = (props) => {
         const zip = zipRef.current.value;
         const cardNumber = cardNumberRef.current.value;
         const cvv = cvvRef.current.value;
+
         let errorsFound = false;
 
         if (!name || name.length === 0) {
@@ -56,7 +57,7 @@ const ShoppingCart = (props) => {
         }
 
         if (!errorsFound) {
-            console.log("order submitted", name, zip, cardNumber, cvv);
+            // console.log("order submitted", name, zip, cardNumber, cvv);
             setCartSubmitted(true);
             props.clearCart([]);
         }
@@ -177,6 +178,33 @@ const ShoppingCart = (props) => {
                                     <label>CVV</label>
                                     <input type="text" placeholder="CVV" ref={cvvRef} />
                                     {cvvError && <p className={classes.errorMessage}>Enter a valid cvv</p>}
+                                </div>
+                                <hr/>
+                                <h1>Shipping Address</h1>
+                                <div className="field">
+                                    <label>Name and Last Name</label>
+                                    <input type="text" placeholder="Name and Last Name" ref={nameRef} />
+                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                </div>
+                                <div className="field">
+                                    <label>Address</label>
+                                    <input type="text" placeholder="Street Address" ref={nameRef} />
+                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                </div>
+                                <div className="field">
+                                    <label>City and State</label>
+                                    <input type="text" placeholder="City and State" ref={nameRef} />
+                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                </div>
+                                <div className="field">
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zip Code" ref={nameRef} />
+                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
+                                </div>
+                                <div className="field">
+                                    <label>Phone Number</label>
+                                    <input type="text" placeholder="Phone Number" ref={nameRef} />
+                                    {/* {nameError && <p className={classes.errorMessage}>Enter a name</p>} */}
                                 </div>
                                 <button className="ui button" type="submit">Submit Order</button>
                             </form>
