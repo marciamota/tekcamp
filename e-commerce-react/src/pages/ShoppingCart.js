@@ -1,6 +1,7 @@
 import React, { Fragment, useRef, useState } from 'react';
 import classes from './ShoppingCart.module.css';
 import EmptyCart from '../components/EmptyCart';
+import CartSubmitted from '../components/CartSubmitted';
 
 const cardPattern = /^[0-9]{16}$/;
 const zipPattern = /^[0-9]{5}$/;
@@ -56,6 +57,8 @@ const ShoppingCart = (props) => {
 
         if (!errorsFound) {
             console.log("order submitted", name, zip, cardNumber, cvv);
+            setCartSubmitted(true);
+            props.clearCart([]);
         }
     };
 
@@ -92,7 +95,7 @@ const ShoppingCart = (props) => {
         if (item.quantity == 0) {
             return;
         }
-        
+
         return (
             <tr key={item.productId}>
                 <td data-label="ITEM">
@@ -100,18 +103,18 @@ const ShoppingCart = (props) => {
                 </td>
                 <td data-label="QTY">
                     <div className={classes.quantityControl}>
-                    {/* <div> */}
-                        <button 
-                            className="ui compact icon button" 
+                        {/* <div> */}
+                        <button
+                            className="ui compact icon button"
                             onClick={() => (reduceQuantityHandler(item.productId))}>
                             -
                         </button>
                         <div className={"ui mini icon input " + classes.divInput}>
                             <input type="number" disabled value={item.quantity} className={classes.shortInput} />
                         </div>
-                        <button 
-                            className="ui compact icon button" 
-                            onClick={() => (increaseQuantityHandler(item.productId))} 
+                        <button
+                            className="ui compact icon button"
+                            onClick={() => (increaseQuantityHandler(item.productId))}
                             disabled={item.available < 1}>
                             +
                         </button>
@@ -126,58 +129,59 @@ const ShoppingCart = (props) => {
 
     return (
         <Fragment>
-            {isEmptyCart ? <EmptyCart /> :
-                <div className="ui two column stackable grid container">
-                    <div className="column">
-                        <table className="ui striped table">
-                            <thead>
-                                <tr key="header">
-                                    <th className='ten wide'>ITEM</th>
-                                    <th className='four wide'>QTY</th>
-                                    <th className='two wide'>PRICE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {itemRows}
-                                <tr key="total">
-                                    <td data-label="ITEM">
-                                        TOTAL
-                                    </td>
-                                    <td data-label="QTY"></td>
-                                    <td data-label="PRICE">
-                                        ${totalPrice}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            {cartSubmitted ? <CartSubmitted /> :
+                isEmptyCart ? <EmptyCart /> :
+                    <div className="ui two column stackable grid container">
+                        <div className="column">
+                            <table className="ui striped table">
+                                <thead>
+                                    <tr key="header">
+                                        <th className='ten wide'>ITEM</th>
+                                        <th className='four wide'>QTY</th>
+                                        <th className='two wide'>PRICE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {itemRows}
+                                    <tr key="total">
+                                        <td data-label="ITEM">
+                                            TOTAL
+                                        </td>
+                                        <td data-label="QTY"></td>
+                                        <td data-label="PRICE">
+                                            ${totalPrice}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="column">
+                            <form className="ui form" onSubmit={submitOrderHandler}>
+                                <h1>Credit Card Information</h1>
+                                <div className="field">
+                                    <label>Name on Card</label>
+                                    <input type="text" placeholder="Name on Card" ref={nameRef} />
+                                    {nameError && <p className={classes.errorMessage}>Enter a name</p>}
+                                </div>
+                                <div className="field">
+                                    <label>Zip</label>
+                                    <input type="text" placeholder="00000" ref={zipRef} />
+                                    {zipError && <p className={classes.errorMessage}>Enter a valid zip</p>}
+                                </div>
+                                <div className="field">
+                                    <label>Credit Card Number</label>
+                                    <input type="text" placeholder="Credit Card Number" ref={cardNumberRef} />
+                                    {cardNumberError && <p className={classes.errorMessage}>Enter a valid credit card</p>}
+                                </div>
+                                <div className="field">
+                                    <label>CVV</label>
+                                    <input type="text" placeholder="CVV" ref={cvvRef} />
+                                    {cvvError && <p className={classes.errorMessage}>Enter a valid cvv</p>}
+                                </div>
+                                <button className="ui button" type="submit">Submit Order</button>
+                            </form>
+                        </div>
                     </div>
-                    <div className="column">
-                        <form className="ui form" onSubmit={submitOrderHandler}>
-                            <h1>Credit Card Information</h1>
-                            <div className="field">
-                                <label>Name on Card</label>
-                                <input type="text" placeholder="Name on Card" ref={nameRef}/>
-                                {nameError && <p className={classes.errorMessage}>Enter a name</p>}
-                            </div>
-                            <div className="field">
-                                <label>Zip</label>
-                                <input type="text" placeholder="00000" ref={zipRef}/>
-                                {zipError && <p className={classes.errorMessage}>Enter a valid zip</p>}
-                            </div>
-                            <div className="field">
-                                <label>Credit Card Number</label>
-                                <input type="text" placeholder="Credit Card Number" ref={cardNumberRef}/>
-                                {cardNumberError && <p className={classes.errorMessage}>Enter a valid credit card</p>}
-                            </div>
-                            <div className="field">
-                                <label>CVV</label>
-                                <input type="text" placeholder="CVV" ref={cvvRef}/>
-                                {cvvError && <p className={classes.errorMessage}>Enter a valid cvv</p>}
-                            </div>
-                            <button className="ui button" type="submit">Submit Order</button>
-                        </form>
-                    </div>
-                </div>
             }
         </Fragment>
     );
