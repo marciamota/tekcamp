@@ -1,7 +1,8 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useRef, useState, useContext } from 'react';
 import classes from './ShoppingCart.module.css';
 import EmptyCart from '../components/EmptyCart';
 import CartSubmitted from '../components/CartSubmitted';
+import AppContext from '../store/app-context';
 
 const cardPattern = /^[0-9]{16}$/;
 const zipPattern = /^[0-9]{5}$/;
@@ -9,6 +10,7 @@ const cvvPattern = /^[0-9]{3}$/;
 const phonePattern = /^[0-9]{10}$/;
 
 const ShoppingCart = (props) => {
+    const appCtx = useContext(AppContext);
     const nameRef = useRef("");
     const zipRef = useRef("");
     const cardNumberRef = useRef("");
@@ -45,8 +47,6 @@ const ShoppingCart = (props) => {
         const state = stateRef.current.value;
         const shippingZip = shippingZipRef.current.value;
         const phone = phoneRef.current.value;
-
-    
 
         let errorsFound = false;
 
@@ -128,7 +128,8 @@ const ShoppingCart = (props) => {
     };
 
     // make a copy of the cart
-    const cartInfo = [...props.cart];
+    // const cartInfo = [...props.cart];
+    const cartInfo = [...appCtx.cart];
 
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
@@ -149,14 +150,17 @@ const ShoppingCart = (props) => {
     const isEmptyCart = totalItems === 0;
 
     const reduceQuantityHandler = (id) => {
-        props.updateCart(id, "decrement");
+        // props.updateCart(id, "decrement");
+        appCtx.updateCart(id, "decrement");
     };
 
     const increaseQuantityHandler = (id) => {
-        props.updateCart(id, "increment");
+        // props.updateCart(id, "increment");
+        appCtx.updateCart(id, "increment");
     };
 
-    const itemRows = props.cart.map((item) => {
+    // const itemRows = props.cart.map((item) => {
+    const itemRows = appCtx.cart.map((item) => {
         if (item.quantity == 0) {
             return;
         }

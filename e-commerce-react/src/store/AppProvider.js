@@ -4,7 +4,9 @@ import AppContext from "./app-context";
 const AppProvider = props => {
     const [cart, setCart] = useState([]);
     const [cartItemsCount, setCartItemsCount] = useState(0);
-    const clearCartHandler = () => { };
+    const clearCartHandler = () => {
+        setCart([]);
+    };
     const updateCartHandler = (id, action) => {
         console.log("test")
         // make a copy of cart and originalProducts

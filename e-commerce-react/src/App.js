@@ -115,7 +115,6 @@ function App() {
               <Route path="/shopping-cart">
                 <ShoppingCart
                   // cart={cart}
-                  // modifyCart={setCart}
                   productList={originalProducts}
                   // updateCart={updateCart}
                   clearCart={clearCart} 

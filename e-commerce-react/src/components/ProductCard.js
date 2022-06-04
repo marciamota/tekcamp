@@ -12,7 +12,6 @@ const ProductCard = (props) => {
 
     return (
         <div className="card" title={"rating: "+ props.data.rating.rate}>
-            {"cartItemsCount: " + appCtx.cartItemsCount}
             <div className="image">
                 <img alt="product" src={props.data.image} />
             </div>

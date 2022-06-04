@@ -1,9 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Header.module.css';
+import AppContext from '../store/app-context';
 
 const Header = (props) => {
     // const [filterTerm, setFilterTerm] = useState("");
+    const appCtx = useContext(AppContext);
     const filterTerm = useRef("");
     const filterHandler = () => {
         const searchTerm = filterTerm.current.value;
@@ -33,7 +35,7 @@ const Header = (props) => {
                     Products
                 </NavLink>
                 <NavLink to='/shopping-cart' className='item'>
-                    Shopping Cart <i className="shopping cart icon"></i>
+                    Shopping Cart <i className="shopping cart icon"></i>{appCtx.cartItemsCount ? appCtx.cartItemsCount: null}
                 </NavLink>
                 {props.isAdmin &&
                 <NavLink to='/manage-store' className='item'>
