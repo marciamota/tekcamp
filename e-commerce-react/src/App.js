@@ -12,55 +12,57 @@ import data from './resources/products.json';
 import LoginPage from './pages/LoginPage';
 import ManagePage from './pages/ManagePage';
 import Header from './components/Header';
+import AppProvider from './store/AppProvider';
 
 function App() {
   // to prevent useEffect from calling the api more than once
   const firstRun = useRef(true);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const clearCart = () => {
-    setCart([]);
+    // setCart([]);
   };
 
   const updateCart = (id, action) => {
-    // make a copy of cart and originalProducts
-    const cartCopy = [...cart];
-    const originalProductsCopy = [...originalProducts];
+    // // make a copy of cart and originalProducts
+    // const cartCopy = [...cart];
+    // const originalProductsCopy = [...originalProducts];
 
-    // find if the added item already exist in the cart
-    let itemInCartIndex = cartCopy.findIndex((item) => {
-      return item.productId == id;
-    });
+    // // find if the added item already exist in the cart
+    // let itemInCartIndex = cartCopy.findIndex((item) => {
+    //   return item.productId == id;
+    // });
 
-    // find the index of the added item in the original products array
-    let originalProductsIndex = originalProducts.findIndex((item) => {
-      return item.id == id;
-    });
+    // // find the index of the added item in the original products array
+    // let originalProductsIndex = originalProducts.findIndex((item) => {
+    //   return item.id == id;
+    // });
 
-    if (action === "increment") {
-      // reduce the availble quantity by 1
-      originalProductsCopy[originalProductsIndex].available--;
-      setOriginalProducts(originalProductsCopy);
-      // increase cart quantity or add to cart
-      if (itemInCartIndex != -1) {
-        // if the added item exist in the cart then increase its quantity by 1
-        cartCopy[itemInCartIndex].quantity++;
-      } else {
-        // if item is not yet in the cart then add it to the cart
-        cartCopy.push({ productId: id, quantity: 1 });
-      }
-      setCart(cartCopy);
-    } else {
-      // increase the availble quantity by 1
-      originalProductsCopy[originalProductsIndex].available++;
-      setOriginalProducts(originalProductsCopy);
-      cartCopy[itemInCartIndex].quantity--;
-    }
+    // if (action === "increment") {
+    //   // reduce the availble quantity by 1
+    //   originalProductsCopy[originalProductsIndex].available--;
+    //   setOriginalProducts(originalProductsCopy);
+    //   // increase cart quantity or add to cart
+    //   if (itemInCartIndex != -1) {
+    //     // if the added item exist in the cart then increase its quantity by 1
+    //     cartCopy[itemInCartIndex].quantity++;
+    //   } else {
+    //     // if item is not yet in the cart then add it to the cart
+    //     cartCopy.push({ productId: id, quantity: 1 });
+    //   }
+    //   setCart(cartCopy);
+    // } else {
+    //   // increase the availble quantity by 1
+    //   originalProductsCopy[originalProductsIndex].available++;
+    //   setOriginalProducts(originalProductsCopy);
+    //   cartCopy[itemInCartIndex].quantity--;
+    //   setCart(cartCopy);
+    // }
   };
 
   // load posts info
@@ -91,52 +93,56 @@ function App() {
   }, [originalProducts]);
 
   return (
-    <div>
-      <Header
-        productList={originalProducts}
-        setProducts={setProducts}
-        user={user}
-        setUser={setUser}
-        isAdmin={isAdmin}
-        setIsAdmin={setIsAdmin}
-      />
-      {
-        loading ? <Loader /> :
-          <Switch>
-            <Route path="/products/:id" >
-              <ProductDetail productList={originalProducts} updateCart={updateCart} />
-            </Route>
-            <Route path="/products">
-              <ProductList productList={products} updateCart={updateCart} />
-            </Route>
-            <Route path="/shopping-cart">
-              <ShoppingCart
-                cart={cart}
-                modifyCart={setCart}
-                productList={originalProducts}
-                updateCart={updateCart}
-                clearCart={clearCart} />
-            </Route>
-            {
-              isAdmin &&
-              <Route path="/manage-store">
-                <ManagePage
+    <AppProvider>
+      <div>
+        <Header
+          productList={originalProducts}
+          setProducts={setProducts}
+          user={user}
+          setUser={setUser}
+          isAdmin={isAdmin}
+          setIsAdmin={setIsAdmin}
+        />
+        {
+          loading ? <Loader /> :
+            <Switch>
+              <Route path="/products/:id" >
+                <ProductDetail productList={originalProducts} updateCart={updateCart} />
+              </Route>
+              <Route path="/products">
+                <ProductList productList={products} updateCart={updateCart} />
+              </Route>
+              <Route path="/shopping-cart">
+                <ShoppingCart
+                  // cart={cart}
+                  // modifyCart={setCart}
                   productList={originalProducts}
-                  setOriginalProducts={setOriginalProducts}
-                  setProducts={setProducts} />
+                  // updateCart={updateCart}
+                  clearCart={clearCart} 
+                  />
               </Route>
-            }
-            {!user &&
-              <Route path="/login-page">
-                <LoginPage setUser={setUser} setIsAdmin={setIsAdmin} />
+              {
+                isAdmin &&
+                <Route path="/manage-store">
+                  <ManagePage
+                    productList={originalProducts}
+                    setOriginalProducts={setOriginalProducts}
+                    setProducts={setProducts} />
+                </Route>
+              }
+              {!user &&
+                <Route path="/login-page">
+                  <LoginPage setUser={setUser} setIsAdmin={setIsAdmin} />
+                </Route>
+              }
+              <Route path="*">
+                <Redirect to="/products" />
               </Route>
-            }
-            <Route path="*">
-              <Redirect to="/products" />
-            </Route>
-          </Switch>
-      }
-    </div>
+            </Switch>
+        }
+      </div>
+    </AppProvider>
+
   );
 }
 

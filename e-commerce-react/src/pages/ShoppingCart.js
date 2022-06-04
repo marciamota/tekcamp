@@ -168,7 +168,6 @@ const ShoppingCart = (props) => {
                 </td>
                 <td data-label="QTY">
                     <div className={classes.quantityControl}>
-                        {/* <div> */}
                         <button
                             className="ui compact icon button"
                             onClick={() => (reduceQuantityHandler(item.productId))}>
