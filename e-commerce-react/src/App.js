@@ -107,7 +107,10 @@ function App() {
           loading ? <Loader /> :
             <Switch>
               <Route path="/products/:id" >
-                <ProductDetail productList={originalProducts} updateCart={updateCart} />
+                <ProductDetail 
+                  productList={originalProducts} 
+                  // updateCart={updateCart} 
+                  />
               </Route>
               <Route path="/products">
                 <ProductList productList={products} updateCart={updateCart} />

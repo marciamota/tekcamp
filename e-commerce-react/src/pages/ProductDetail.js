@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import AppContext from '../store/app-context';
 import classes from './ProductDetail.module.css';
 
 const ProductDetail = (props) => {
+    const appCtx = useContext(AppContext);
     const Params = useParams();
     const id = Params.id;
 
     const product = props.productList.find((singleProduct) => singleProduct.id == id);
 
     const addToCartHandler = () => {
-        props.updateCart(id, "increment");
+        // props.updateCart(id, "increment");
+        appCtx.updateCart(id, "increment");
     };
 
     return (
