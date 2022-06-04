@@ -20,6 +20,8 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const clearCart = () => {
     setCart([]);
@@ -78,7 +80,13 @@ function App() {
 
   return (
     <div>
-      <Header productList={originalProducts} setProducts={setProducts}/>
+      <Header 
+        productList={originalProducts} 
+        setProducts={setProducts}
+        setUser={setUser}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
+      />
       {
         loading ? <Loader /> :
           <Switch>
@@ -96,12 +104,15 @@ function App() {
                 updateCart={updateCart}
                 clearCart={clearCart}/>
             </Route>
-            <Route path="/manage-store">
-              <ManagePage 
-                productList={originalProducts} 
-                setOriginalProducts={setOriginalProducts}
-                setProducts={setProducts}/>
-            </Route>
+            {
+              true && 
+              <Route path="/manage-store">
+                <ManagePage 
+                  productList={originalProducts} 
+                  setOriginalProducts={setOriginalProducts}
+                  setProducts={setProducts}/>
+              </Route>
+            }
             <Route path="/login-page">
               <LoginPage />
             </Route>

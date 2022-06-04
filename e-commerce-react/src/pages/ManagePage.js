@@ -28,7 +28,7 @@ const ManagePage = (props) => {
 
     const removeProductHandler = (id) => {
         const updatedList = props.productList.filter((product) => product.id != id);
-        props.setOriginalProducts(updatedList); 
+        props.setOriginalProducts(updatedList);
         // props.setProducts(updatedList); 
     };
     const clearFormErrors = () => {
@@ -76,57 +76,60 @@ const ManagePage = (props) => {
         if (productNameRef.current.value.length == 0) {
             setProductNameError(true);
             errorsFound = true;
-        }; 
+        };
         if (serialRef.current.value.length == 0) {
             setSerialError(true);
             errorsFound = true;
-        }; 
+        };
         if (!priceRef.current.value.match(pricePattern)) {
             setPriceError(true);
             errorsFound = true;
-        }; 
+        };
         if (manufacturerRef.current.value.length == 0) {
             setManufacturerError(true);
             errorsFound = true;
-        }; 
+        };
         if (categoryRef.current.value.length == 0) {
             setCategoryError(true);
             errorsFound = true;
-        }; 
+        };
         if (!quantityRef.current.value.match(quantityPattern)) {
             setQuantityError(true);
             errorsFound = true;
-        }; 
+        };
         if (!imageRef.current.value.match(urlPattern)) {
             setImageError(true);
             errorsFound = true;
         };
-        const productData = {
-            id: editItemId,
-            title: productNameRef.current.value,
-            serial_number: serialRef.current.value,
-            price: priceRef.current.value,
-            manufacturer: manufacturerRef.current.value,
-            category: categoryRef.current.value,
-            available: quantityRef.current.value,
-            image: imageRef.current.value,
-        };
-        const productListCopy = [...props.productList];
-        if (editMode) {
-            const itemInfoIndex = props.productList.findIndex((product) => product.id == editItemId );
-            productListCopy[itemInfoIndex] = {...productData};
-        } else {
-            let newId = -1;
-            for (const product of props.productList) {
-                if (newId < +product.id) {
-                    newId = +product.id;
-                };
+        if (!errorsFound) {
+            const productData = {
+                id: editItemId,
+                title: productNameRef.current.value,
+                serial_number: serialRef.current.value,
+                price: priceRef.current.value,
+                manufacturer: manufacturerRef.current.value,
+                category: categoryRef.current.value,
+                available: quantityRef.current.value,
+                image: imageRef.current.value,
             };
-            productData.id = newId + 1;
-            productListCopy.push(productData);
+            const productListCopy = [...props.productList];
+            
+            if (editMode) {
+                const itemInfoIndex = props.productList.findIndex((product) => product.id == editItemId);
+                productListCopy[itemInfoIndex] = { ...productData };
+            } else {
+                let newId = -1;
+                for (const product of props.productList) {
+                    if (newId < +product.id) {
+                        newId = +product.id;
+                    };
+                };
+                productData.id = newId + 1;
+                productListCopy.push(productData);
+            }
+            props.setOriginalProducts(productListCopy);
+            clearFormData();
         }
-        props.setOriginalProducts(productListCopy);
-        clearFormData();
     };
 
     const itemRows = props.productList.map((product) => {
@@ -172,25 +175,25 @@ const ManagePage = (props) => {
                 </div>
                 <div className="column">
                     <form className="ui form" onSubmit={addEditProductHandler}>
-                        <h1>{editMode? "Edit Product" : "Add Product"}</h1>
+                        <h1>{editMode ? "Edit Product" : "Add Product"}</h1>
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" placeholder="Name" ref={productNameRef}/>
+                            <input type="text" placeholder="Name" ref={productNameRef} />
                             {productNameError && <p className={classes.errorMessage}>Add a valid name</p>}
                         </div>
                         <div className="field">
                             <label>Serial Number</label>
-                            <input type="text" placeholder="00000" ref={serialRef}/>
+                            <input type="text" placeholder="00000" ref={serialRef} />
                             {serialError && <p className={classes.errorMessage}>Add a serial number</p>}
                         </div>
                         <div className="field">
                             <label>Price</label>
-                            <input type="number" placeholder="00.00" ref={priceRef} step="0.01"/>
+                            <input type="number" placeholder="00.00" ref={priceRef} step="0.01" />
                             {priceError && <p className={classes.errorMessage}>Add a valid price</p>}
                         </div>
                         <div className="field">
                             <label>Manufacturer</label>
-                            <input type="text" placeholder="manufacturer" ref={manufacturerRef}/>
+                            <input type="text" placeholder="manufacturer" ref={manufacturerRef} />
                             {manufacturerError && <p className={classes.errorMessage}>Add a valid manufacturer</p>}
                         </div>
                         <div className="field">
@@ -200,7 +203,7 @@ const ManagePage = (props) => {
                         </div>
                         <div className="field">
                             <label>Quantity</label>
-                            <input type="number" placeholder="0" ref={quantityRef}/>
+                            <input type="number" placeholder="0" ref={quantityRef} />
                             {quantityError && <p className={classes.errorMessage}>Add a valid quantity</p>}
                         </div>
                         <div className="field">
@@ -209,10 +212,10 @@ const ManagePage = (props) => {
                             {imageError && <p className={classes.errorMessage}>Add a valid image url</p>}
                         </div>
                         <button className="ui button" type="submit">
-                            {editMode? "Edit Product" : "Add Product"}
+                            {editMode ? "Edit Product" : "Add Product"}
                         </button>
                         {
-                            editMode && 
+                            editMode &&
                             <button className="ui button" type="button" onClick={cancelEditProductHandler}>
                                 Cancel Edit
                             </button>

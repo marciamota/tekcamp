@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+https://www.aspsnippets.com/Articles/Regular-Expression-Regex-to-allow-both-decimals-as-well-as-integers-and-Regex-for-allowing-any-decimal-number.aspx
+used for price pattern
+
+https://stackoverflow.com/questions/19011861/is-there-a-float-input-type-in-html5
+used for price pattern
+
+https://regex101.com/
+used to test regex
+
+https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
+used for <a/> not to navigate

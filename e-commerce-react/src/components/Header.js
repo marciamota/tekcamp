@@ -14,6 +14,10 @@ const Header = (props) => {
         props.setProducts(filteredProducts);
     }
 
+    const logoutHandler = () => {
+
+    };
+
     return (
         <div className={"ui stackable menu"}>
             <h1 className={classes.companyname}>Marcia's E-Commerce</h1>
@@ -31,9 +35,15 @@ const Header = (props) => {
                 <NavLink to='/manage-store' className='item'>
                     Manage Store
                 </NavLink>
-                <NavLink to='/login-page' className='item'>
-                    Login
-                </NavLink>
+                
+                {props.user ?
+                    <a href="javascript:void(0)" className='item' onClick={logoutHandler}>
+                        Logout
+                    </a> :
+                    <NavLink to='/login-page' className='item'>
+                        Login
+                    </NavLink>
+                }
             </div>
         </div>
     );
