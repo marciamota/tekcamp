@@ -17,8 +17,10 @@ const Header = (props) => {
     }
 
     const logoutHandler = () => {
-        props.setUser(null);
-        props.setIsAdmin(false);
+        // props.setUser(null);
+        // props.setIsAdmin(false);
+        appCtx.setUser(null);
+        appCtx.setIsAdmin(false);
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("isAdmin");
     };
@@ -37,12 +39,12 @@ const Header = (props) => {
                 <NavLink to='/shopping-cart' className='item'>
                     Shopping Cart <i className="shopping cart icon"></i>{appCtx.cartItemsCount ? appCtx.cartItemsCount: null}
                 </NavLink>
-                {props.isAdmin &&
+                {appCtx.isAdmin &&
                 <NavLink to='/manage-store' className='item'>
                     Manage Store
                 </NavLink>
                 }
-                {props.user ?
+                {appCtx.user ?
                     <a href="#" className='ui item' onClick={logoutHandler}>
                         Logout
                     </a> 

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import AppContext from '../store/app-context';
 
 import classes from './LoginPage.module.css';
 
@@ -9,6 +10,7 @@ const adminPassword = "admin";
 // import ProductCard from '../components/ProductCard';
 
 const LoginPage = (props) => {
+    const appCtx = useContext(AppContext);
     const nameRef = useRef("");
     const passwordRef = useRef("");
     const [nameError, setNameError] = useState(false);
@@ -28,8 +30,10 @@ const LoginPage = (props) => {
             errorsFound = true;
         };
         if (!errorsFound) {
-            props.setUser(nameRef.current.value);
-            props.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
+            // props.setUser(nameRef.current.value);
+            appCtx.setUser(nameRef.current.value);
+            // props.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
+            appCtx.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
         };
         sessionStorage.setItem("user", nameRef.current.value);
         sessionStorage.setItem("isAdmin", (nameRef.current.value == adminUser && passwordRef.current.value == adminPassword));

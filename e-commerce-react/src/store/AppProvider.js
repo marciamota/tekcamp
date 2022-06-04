@@ -1,18 +1,25 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import AppContext from "./app-context";
+import data from '../resources/products.json';
 
 const AppProvider = props => {
+    const firstRun = useRef(true);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [originalProducts, setOriginalProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [cartItemsCount, setCartItemsCount] = useState(0);
+
     const clearCartHandler = () => {
         setCart([]);
         setCartItemsCount(0);
     };
     const updateCartHandler = (id, action) => {
-        console.log("test")
         // make a copy of cart and originalProducts
         const cartCopy = [...cart];
-        // const originalProductsCopy = [...originalProducts];
+        const originalProductsCopy = [...originalProducts];
 
         // find if the added item already exist in the cart
         let itemInCartIndex = cartCopy.findIndex((item) => {
@@ -48,17 +55,43 @@ const AppProvider = props => {
         }
     };
 
+    useEffect(() => {
+        if (firstRun.current) {
+            firstRun.current = false;
+            const savedData = JSON.parse(sessionStorage.getItem("products"));
+            if (savedData) {
+                setOriginalProducts(savedData);
+            } else {
+                setOriginalProducts(data);
+                sessionStorage.setItem("products", JSON.stringify(data));
+            }
+            setLoading(false);
+            const userName = sessionStorage.getItem("user");
+            if (userName) {
+                const isAdmin = sessionStorage.getItem("isAdmin");
+                setUser(userName);
+                setIsAdmin(isAdmin === "true")
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!firstRun.current) {
+            setProducts(originalProducts);
+        }
+    }, [originalProducts]);
+
     const appContext = {
-        user: null,
-        setUser: (user) => { },
-        isAdmin: false,
-        setIsAdmin: (isAdmin) => { },
-        loading: false,
-        setLoading: (loading) => { },
-        originalProducts: [],
-        setOriginalProducts: (originalProducts) => { },
-        products: [],
-        setProducts: (products) => { },
+        user: user,
+        setUser: setUser,
+        isAdmin: isAdmin,
+        setIsAdmin: setIsAdmin,
+        loading: loading,
+        setLoading: setLoading,
+        originalProducts: originalProducts,
+        setOriginalProducts: setOriginalProducts,
+        products: products,
+        setProducts: setProducts,
         cart: cart,
         cartItemsCount: cartItemsCount,
         clearCart: clearCartHandler,
