@@ -117,7 +117,7 @@ function App() {
                   // cart={cart}
                   productList={originalProducts}
                   // updateCart={updateCart}
-                  clearCart={clearCart} 
+                  // clearCart={clearCart} 
                   />
               </Route>
               {

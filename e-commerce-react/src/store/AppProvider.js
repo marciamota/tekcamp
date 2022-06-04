@@ -6,6 +6,7 @@ const AppProvider = props => {
     const [cartItemsCount, setCartItemsCount] = useState(0);
     const clearCartHandler = () => {
         setCart([]);
+        setCartItemsCount(0);
     };
     const updateCartHandler = (id, action) => {
         console.log("test")

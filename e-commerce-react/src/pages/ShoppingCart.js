@@ -123,7 +123,8 @@ const ShoppingCart = (props) => {
         if (!errorsFound) {
             // console.log("order submitted", name, zip, cardNumber, cvv);
             setCartSubmitted(true);
-            props.clearCart([]);
+            // props.clearCart([]);
+            appCtx.clearCart([]);
         }
     };
 
