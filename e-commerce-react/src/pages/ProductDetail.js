@@ -15,7 +15,7 @@ const ProductDetail = (props) => {
     return (
         <div className="ui two column stackable grid container">
             <div className="column">
-                <img class="ui fluid image" src={product.image} />
+                <img className="ui fluid image" src={product.image} />
             </div>
             <div className="column">
                 <h3><span className="text-secondary">Product's </span>Details</h3>
