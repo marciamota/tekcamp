@@ -63,13 +63,18 @@ function App() {
 
   // load posts info (axios)
   useEffect(() => {
-    if (products.length === 0 && firstRun.current) {
+    if (firstRun.current) {
       firstRun.current = false;
       setOriginalProducts(data);
-      setProducts(data);
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (!firstRun.current) {
+      setProducts(originalProducts);
+    }
+  }, [originalProducts]);
 
   return (
     <div>
