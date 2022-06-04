@@ -15,11 +15,12 @@ const Header = (props) => {
     }
 
     const logoutHandler = () => {
-
+        props.setUser(null);
+        props.setIsAdmin(false);
     };
 
     return (
-        <div className={"ui stackable menu"}>
+        <div className={"ui stackable mini menu"}>
             <h1 className={classes.companyname}>Marcia's E-Commerce</h1>
             <div className='right menu'>
                 <div className={"ui mini icon input " + classes.smaller} >
@@ -32,14 +33,19 @@ const Header = (props) => {
                 <NavLink to='/shopping-cart' className='item'>
                     Shopping Cart <i className="shopping cart icon"></i>
                 </NavLink>
+                {props.isAdmin &&
                 <NavLink to='/manage-store' className='item'>
                     Manage Store
                 </NavLink>
-                
+                }
                 {props.user ?
-                    <a href="javascript:void(0)" className='item' onClick={logoutHandler}>
+                    <a href="#" className='ui item' onClick={logoutHandler}>
                         Logout
-                    </a> :
+                    </a> 
+                    // <NavLink to='#' className='item' onClick={logoutHandler}>
+                    //     Logout
+                    // </NavLink>
+                    :
                     <NavLink to='/login-page' className='item'>
                         Login
                     </NavLink>

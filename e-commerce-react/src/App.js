@@ -52,7 +52,7 @@ function App() {
         cartCopy[itemInCartIndex].quantity++;
       } else {
         // if item is not yet in the cart then add it to the cart
-        cartCopy.push({ productId: id,  quantity: 1 });
+        cartCopy.push({ productId: id, quantity: 1 });
       }
       setCart(cartCopy);
     } else {
@@ -80,9 +80,10 @@ function App() {
 
   return (
     <div>
-      <Header 
-        productList={originalProducts} 
+      <Header
+        productList={originalProducts}
         setProducts={setProducts}
+        user={user}
         setUser={setUser}
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
@@ -91,31 +92,33 @@ function App() {
         loading ? <Loader /> :
           <Switch>
             <Route path="/products/:id" >
-              <ProductDetail productList={originalProducts} updateCart={updateCart}/>
+              <ProductDetail productList={originalProducts} updateCart={updateCart} />
             </Route>
             <Route path="/products">
-              <ProductList productList={products} updateCart={updateCart}/>
+              <ProductList productList={products} updateCart={updateCart} />
             </Route>
             <Route path="/shopping-cart">
-              <ShoppingCart 
-                cart={cart} 
-                modifyCart={setCart} 
-                productList={originalProducts} 
+              <ShoppingCart
+                cart={cart}
+                modifyCart={setCart}
+                productList={originalProducts}
                 updateCart={updateCart}
-                clearCart={clearCart}/>
+                clearCart={clearCart} />
             </Route>
             {
-              true && 
+              isAdmin &&
               <Route path="/manage-store">
-                <ManagePage 
-                  productList={originalProducts} 
+                <ManagePage
+                  productList={originalProducts}
                   setOriginalProducts={setOriginalProducts}
-                  setProducts={setProducts}/>
+                  setProducts={setProducts} />
               </Route>
             }
-            <Route path="/login-page">
-              <LoginPage />
-            </Route>
+            {!user &&
+              <Route path="/login-page">
+                <LoginPage setUser={setUser} setIsAdmin={setIsAdmin} />
+              </Route>
+            }
             <Route path="*">
               <Redirect to="/products" />
             </Route>
