@@ -29,7 +29,7 @@ const ManagePage = (props) => {
     const removeProductHandler = (id) => {
         const updatedList = props.productList.filter((product) => product.id != id);
         props.setOriginalProducts(updatedList);
-        // props.setProducts(updatedList); 
+        sessionStorage.setItem("products", JSON.stringify(updatedList));
     };
     const clearFormErrors = () => {
         setProductNameError(false);
@@ -129,6 +129,7 @@ const ManagePage = (props) => {
             }
             props.setOriginalProducts(productListCopy);
             clearFormData();
+            sessionStorage.setItem("products", JSON.stringify(productListCopy));
         }
     };
 

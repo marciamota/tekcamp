@@ -63,12 +63,24 @@ function App() {
     }
   };
 
-  // load posts info (axios)
+  // load posts info
   useEffect(() => {
     if (firstRun.current) {
       firstRun.current = false;
-      setOriginalProducts(data);
+      const savedData = JSON.parse(sessionStorage.getItem("products"));
+      if (savedData) {
+        setOriginalProducts(savedData);
+      } else {
+        setOriginalProducts(data);
+        sessionStorage.setItem("products", JSON.stringify(data));
+      }
       setLoading(false);
+      const userName = sessionStorage.getItem("user");
+      if (userName) {
+        const isAdmin = sessionStorage.getItem("isAdmin");
+        setUser(userName);
+        setIsAdmin(isAdmin === "true")
+      }
     }
   }, []);
 

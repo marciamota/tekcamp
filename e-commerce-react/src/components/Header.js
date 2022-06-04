@@ -17,6 +17,8 @@ const Header = (props) => {
     const logoutHandler = () => {
         props.setUser(null);
         props.setIsAdmin(false);
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("isAdmin");
     };
 
     return (

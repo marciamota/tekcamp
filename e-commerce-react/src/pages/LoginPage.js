@@ -31,6 +31,8 @@ const LoginPage = (props) => {
             props.setUser(nameRef.current.value);
             props.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
         };
+        sessionStorage.setItem("user", nameRef.current.value);
+        sessionStorage.setItem("isAdmin", (nameRef.current.value == adminUser && passwordRef.current.value == adminPassword));
     }; 
 
     return (
