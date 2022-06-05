@@ -35,8 +35,8 @@ const LoginPage = (props) => {
             // props.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
             appCtx.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
         };
-        sessionStorage.setItem("user", nameRef.current.value);
-        sessionStorage.setItem("isAdmin", (nameRef.current.value == adminUser && passwordRef.current.value == adminPassword));
+        localStorage.setItem("user", nameRef.current.value);
+        localStorage.setItem("isAdmin", (nameRef.current.value == adminUser && passwordRef.current.value == adminPassword));
     }; 
 
     return (

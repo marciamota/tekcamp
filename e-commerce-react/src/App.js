@@ -18,11 +18,11 @@ import AppContext from './store/app-context';
 function App() {
   // to prevent useEffect from calling the api more than once
   const appCtx = useContext(AppContext);
-  const firstRun = useRef(true);
-  const [originalProducts, setOriginalProducts] = useState([]);
-  const [products, setProducts] = useState([]);
+  // const firstRun = useRef(true);
+  // const [originalProducts, setOriginalProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   // const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   // const [user, setUser] = useState(null);
   // const [isAdmin, setIsAdmin] = useState(false);
 
@@ -68,49 +68,49 @@ function App() {
   // };
 
   // load posts info
-  useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false;
-      const savedData = JSON.parse(sessionStorage.getItem("products"));
-      if (savedData) {
-        setOriginalProducts(savedData);
-      } else {
-        setOriginalProducts(data);
-        sessionStorage.setItem("products", JSON.stringify(data));
-      }
-      setLoading(false);
-      // const userName = sessionStorage.getItem("user");
+  // useEffect(() => {
+  //   if (firstRun.current) {
+  //     firstRun.current = false;
+  //     const savedData = JSON.parse(localStorage.getItem("products"));
+  //     if (savedData) {
+  //       setOriginalProducts(savedData);
+  //     } else {
+  //       setOriginalProducts(data);
+  //       localStorage.setItem("products", JSON.stringify(data));
+  //     }
+  //     setLoading(false);
+      // const userName = localStorage.getItem("user");
       // if (userName) {
-      //   const isAdmin = sessionStorage.getItem("isAdmin");
+      //   const isAdmin = localStorage.getItem("isAdmin");
       //   setUser(userName);
       //   setIsAdmin(isAdmin === "true")
       // }
-    }
-  }, []);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (!firstRun.current) {
-      setProducts(originalProducts);
-    }
-  }, [originalProducts]);
+  // useEffect(() => {
+  //   if (!firstRun.current) {
+  //     setProducts(originalProducts);
+  //   }
+  // }, [originalProducts]);
 
   return (
     // <AppProvider>
       <div>
         <Header
-          productList={originalProducts}
-          setProducts={setProducts}
+          // productList={originalProducts}
+          // setProducts={setProducts}
           // user={user}
           // setUser={setUser}
           // isAdmin={isAdmin}
           // setIsAdmin={setIsAdmin}
         />
         {
-          loading ? <Loader /> :
+          appCtx.loading ? <Loader /> :
             <Switch>
               <Route path="/products/:id" >
                 <ProductDetail 
-                  productList={originalProducts} 
+                  // productList={originalProducts} 
                   // updateCart={updateCart} 
                   />
               </Route>
@@ -123,7 +123,7 @@ function App() {
               <Route path="/shopping-cart">
                 <ShoppingCart
                   // cart={cart}
-                  productList={originalProducts}
+                  // productList={originalProducts}
                   // updateCart={updateCart}
                   // clearCart={clearCart} 
                   />
@@ -132,9 +132,10 @@ function App() {
                 appCtx.isAdmin &&
                 <Route path="/manage-store">
                   <ManagePage
-                    productList={originalProducts}
-                    setOriginalProducts={setOriginalProducts}
-                    setProducts={setProducts} />
+                    // productList={originalProducts}
+                    // setOriginalProducts={setOriginalProducts}
+                    // setProducts={setProducts} 
+                    />
                 </Route>
               }
               {!appCtx.user &&

@@ -58,17 +58,17 @@ const AppProvider = props => {
     useEffect(() => {
         if (firstRun.current) {
             firstRun.current = false;
-            const savedData = JSON.parse(sessionStorage.getItem("products"));
+            const savedData = JSON.parse(localStorage.getItem("products"));
             if (savedData) {
                 setOriginalProducts(savedData);
             } else {
                 setOriginalProducts(data);
-                sessionStorage.setItem("products", JSON.stringify(data));
+                localStorage.setItem("products", JSON.stringify(data));
             }
             setLoading(false);
-            const userName = sessionStorage.getItem("user");
+            const userName = localStorage.getItem("user");
             if (userName) {
-                const isAdmin = sessionStorage.getItem("isAdmin");
+                const isAdmin = localStorage.getItem("isAdmin");
                 setUser(userName);
                 setIsAdmin(isAdmin === "true")
             }

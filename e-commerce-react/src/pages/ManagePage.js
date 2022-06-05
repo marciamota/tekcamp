@@ -1,4 +1,5 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
+import AppContext from '../store/app-context';
 import classes from './ManagePage.module.css';
 
 const pricePattern = /((\d+)((\.\d{1,2})?))$/;
@@ -6,6 +7,7 @@ const quantityPattern = /^[1-9]\d*$/;
 const urlPattern = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
 
 const ManagePage = (props) => {
+    const appCtx = useContext(AppContext);
     const productNameRef = useRef('');
     const serialRef = useRef('');
     const priceRef = useRef('');
@@ -27,9 +29,11 @@ const ManagePage = (props) => {
 
 
     const removeProductHandler = (id) => {
-        const updatedList = props.productList.filter((product) => product.id != id);
-        props.setOriginalProducts(updatedList);
-        sessionStorage.setItem("products", JSON.stringify(updatedList));
+        // const updatedList = props.productList.filter((product) => product.id != id);
+        // props.setOriginalProducts(updatedList);
+        const updatedList = appCtx.products.filter((product) => product.id != id);
+        appCtx.setOriginalProducts(updatedList);
+        localStorage.setItem("products", JSON.stringify(updatedList));
     };
     const clearFormErrors = () => {
         setProductNameError(false);
@@ -54,7 +58,8 @@ const ManagePage = (props) => {
         setEditMode(true);
         setEditItemId(id);
         clearFormErrors();
-        const productInfo = props.productList.find(product => product.id == id);
+        // const productInfo = props.productList.find(product => product.id == id);
+        const productInfo = appCtx.products.find(product => product.id == id);
         productNameRef.current.value = productInfo.title;
         serialRef.current.value = productInfo.serial_number;
         priceRef.current.value = productInfo.price;
@@ -112,14 +117,17 @@ const ManagePage = (props) => {
                 available: quantityRef.current.value,
                 image: imageRef.current.value,
             };
-            const productListCopy = [...props.productList];
+            // const productListCopy = [...props.productList];
+            const productListCopy = [...appCtx.products];
             
             if (editMode) {
-                const itemInfoIndex = props.productList.findIndex((product) => product.id == editItemId);
+                // const itemInfoIndex = props.productList.findIndex((product) => product.id == editItemId);
+                const itemInfoIndex = appCtx.products.findIndex((product) => product.id == editItemId);
                 productListCopy[itemInfoIndex] = { ...productData };
             } else {
                 let newId = -1;
-                for (const product of props.productList) {
+                // for (const product of props.productList) {
+                for (const product of appCtx.products) {
                     if (newId < +product.id) {
                         newId = +product.id;
                     };
@@ -127,13 +135,15 @@ const ManagePage = (props) => {
                 productData.id = newId + 1;
                 productListCopy.push(productData);
             }
-            props.setOriginalProducts(productListCopy);
+            // props.setOriginalProducts(productListCopy);
+            appCtx.setOriginalProducts(productListCopy);
             clearFormData();
-            sessionStorage.setItem("products", JSON.stringify(productListCopy));
+            localStorage.setItem("products", JSON.stringify(productListCopy));
         }
     };
 
-    const itemRows = props.productList.map((product) => {
+    // const itemRows = props.productList.map((product) => {
+    const itemRows = appCtx.products.map((product) => {
         return (
             <tr key={product.id}>
                 <td data-label="ID">

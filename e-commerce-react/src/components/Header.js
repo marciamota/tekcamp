@@ -9,11 +9,13 @@ const Header = (props) => {
     const filterTerm = useRef("");
     const filterHandler = () => {
         const searchTerm = filterTerm.current.value;
-        const filteredProducts = props.productList.filter((product) => {
+        // const filteredProducts = props.productList.filter((product) => {
+        const filteredProducts = appCtx.products.filter((product) => {
             return product.title.toUpperCase().includes(searchTerm.toUpperCase()) || 
                 product.category.toUpperCase().includes(searchTerm.toUpperCase());
         });
-        props.setProducts(filteredProducts);
+        // props.setProducts(filteredProducts);
+        appCtx.setProducts(filteredProducts);
     }
 
     const logoutHandler = () => {
@@ -21,8 +23,8 @@ const Header = (props) => {
         // props.setIsAdmin(false);
         appCtx.setUser(null);
         appCtx.setIsAdmin(false);
-        sessionStorage.removeItem("user");
-        sessionStorage.removeItem("isAdmin");
+        localStorage.removeItem("user");
+        localStorage.removeItem("isAdmin");
     };
 
     return (

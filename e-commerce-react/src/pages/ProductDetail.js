@@ -8,7 +8,8 @@ const ProductDetail = (props) => {
     const Params = useParams();
     const id = Params.id;
 
-    const product = props.productList.find((singleProduct) => singleProduct.id == id);
+    // const product = props.productList.find((singleProduct) => singleProduct.id == id);
+    const product = appCtx.products.find((singleProduct) => singleProduct.id == id);
 
     const addToCartHandler = () => {
         // props.updateCart(id, "increment");

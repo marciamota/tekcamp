@@ -134,7 +134,8 @@ const ShoppingCart = (props) => {
 
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
-        const itemInfo = props.productList.find((product) => product.id == cartItem.productId);
+        // const itemInfo = props.productList.find((product) => product.id == cartItem.productId);
+        const itemInfo = appCtx.products.find((product) => product.id == cartItem.productId);
         cartItem.name = itemInfo.title;
         cartItem.price = itemInfo.price;
         cartItem.available = itemInfo.available;
