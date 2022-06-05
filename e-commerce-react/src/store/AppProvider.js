@@ -60,14 +60,18 @@ const AppProvider = props => {
             firstRun.current = false;
             const savedData = JSON.parse(localStorage.getItem("products"));
             if (savedData) {
+                // load from local storage
                 setOriginalProducts(savedData);
             } else {
+                // load from json file
                 setOriginalProducts(data);
+                // save in local storage
                 localStorage.setItem("products", JSON.stringify(data));
             }
             setLoading(false);
             const userName = localStorage.getItem("user");
             if (userName) {
+                // if there was a user logged in then retrieve its info
                 const isAdmin = localStorage.getItem("isAdmin");
                 setUser(userName);
                 setIsAdmin(isAdmin === "true")
