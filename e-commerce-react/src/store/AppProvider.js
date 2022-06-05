@@ -27,14 +27,14 @@ const AppProvider = props => {
         });
 
         // find the index of the added item in the original products array
-        // let originalProductsIndex = originalProducts.findIndex((item) => {
-        //     return item.id == id;
-        // });
+        let originalProductsIndex = originalProducts.findIndex((item) => {
+            return item.id == id;
+        });
 
         if (action === "increment") {
             // reduce the availble quantity by 1
-            // originalProductsCopy[originalProductsIndex].available--;
-            // setOriginalProducts(originalProductsCopy);
+            originalProductsCopy[originalProductsIndex].available--;
+            setOriginalProducts(originalProductsCopy);
             // increase cart quantity or add to cart
             if (itemInCartIndex != -1) {
                 // if the added item exist in the cart then increase its quantity by 1
@@ -47,8 +47,8 @@ const AppProvider = props => {
             setCart(cartCopy);
         } else {
             // increase the availble quantity by 1
-            //   originalProductsCopy[originalProductsIndex].available++;
-            //   setOriginalProducts(originalProductsCopy);
+            originalProductsCopy[originalProductsIndex].available++;
+            setOriginalProducts(originalProductsCopy);
             cartCopy[itemInCartIndex].quantity--;
             setCartItemsCount(cartItemsCount - 1);
             setCart(cartCopy);

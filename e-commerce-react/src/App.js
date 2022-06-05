@@ -116,7 +116,7 @@ function App() {
               </Route>
               <Route path="/products">
                 <ProductList 
-                  productList={products} 
+                  // productList={products} 
                   // updateCart={updateCart} 
                   />
               </Route>
