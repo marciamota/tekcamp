@@ -10,10 +10,16 @@ const Header = (props) => {
     const filterHandler = () => {
         const searchTerm = filterTerm.current.value;
         // const filteredProducts = props.productList.filter((product) => {
-        const filteredProducts = appCtx.products.filter((product) => {
-            return product.title.toUpperCase().includes(searchTerm.toUpperCase()) || 
-                product.category.toUpperCase().includes(searchTerm.toUpperCase());
-        });
+        let filteredProducts = [];
+        if (searchTerm.length > 0) {
+            filteredProducts = appCtx.originalProducts.filter((product) => {
+                return product.title.toUpperCase().includes(searchTerm.toUpperCase()) || 
+                    product.category.toUpperCase().includes(searchTerm.toUpperCase());
+            });
+        } else {
+            filteredProducts = appCtx.products;
+        }
+        
         // props.setProducts(filteredProducts);
         appCtx.setProducts(filteredProducts);
     }
