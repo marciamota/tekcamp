@@ -15,7 +15,9 @@ const AppProvider = props => {
     const clearCartHandler = () => {
         setCart([]);
         setCartItemsCount(0);
+        localStorage.removeItem("cart");
     };
+
     const updateCartHandler = (id, action) => {
         // make a copy of cart and originalProducts
         const cartCopy = [...cart];
@@ -45,6 +47,7 @@ const AppProvider = props => {
             }
             setCartItemsCount(cartItemsCount + 1);
             setCart(cartCopy);
+            localStorage.setItem("cart", JSON.stringify(cartCopy));
         } else {
             // increase the availble quantity by 1
             originalProductsCopy[originalProductsIndex].available++;
@@ -52,6 +55,7 @@ const AppProvider = props => {
             cartCopy[itemInCartIndex].quantity--;
             setCartItemsCount(cartItemsCount - 1);
             setCart(cartCopy);
+            localStorage.setItem("cart", JSON.stringify(cartCopy));
         }
     };
 
@@ -68,7 +72,7 @@ const AppProvider = props => {
                 // save in local storage
                 localStorage.setItem("products", JSON.stringify(data));
             }
-            setLoading(false);
+            
             const userName = localStorage.getItem("user");
             if (userName) {
                 // if there was a user logged in then retrieve its info
@@ -76,6 +80,17 @@ const AppProvider = props => {
                 setUser(userName);
                 setIsAdmin(isAdmin === "true")
             }
+            const cartStorage = JSON.parse(localStorage.getItem("cart"));
+            if (cartStorage) {
+                // if there was cart info then retrieve its info
+                let cartItemsQty = 0;
+                for (const item of cartStorage) {
+                    cartItemsQty += +item.quantity;
+                }
+                setCartItemsCount(cartItemsQty);
+                setCart(cartStorage);
+            }
+            setLoading(false);
         }
     }, []);
 

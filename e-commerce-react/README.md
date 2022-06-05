@@ -1,75 +1,34 @@
-# Getting Started with Create React App
+# Capstone 1: E-Commerce Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was to create my own e-commerce website.
 
-## Available Scripts
+## Site Map Sketch
+is attached to the same folder as this read.me file named as CapstonedesktopMobilesketch.pdf
 
-In the project directory, you can run:
+## Notes
+On Login the administrator username is: admin
+On Login the administrator password is: admin
+To login as a regular user you can type anything for username and password.
 
-### `npm start`
+There is a bug in chrome inspect page when you open localhost:3000. If you open inspect to inspect any header you may find the page flickering, this is not a code bug but chrome bug, you can open in firefox without any issues. If you want to use chrome just go to products page and hit reload > empty cache and Hard Reload.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Resources:
+https://fakestoreapi.com/
+Used to retrieve fake products.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+https://teksystems.udemy.com/course/
+Section 3: Communicating with Props
+Section 5: State in React Components
+Section 8: Making API Requests with React
+Section 12: Understanding Hooks
+Section 20: Navigation with react router
+Section 27: The Context System with React
 
-### `npm test`
+https://stackoverflow.com/questions/42253277/react-router-v4-how-to-get-current-route
+Used for learning how to get current route. Learn about useLocation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
+https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+Used in index.html file to style
 
 https://www.aspsnippets.com/Articles/Regular-Expression-Regex-to-allow-both-decimals-as-well-as-integers-and-Regex-for-allowing-any-decimal-number.aspx
 used for price pattern
@@ -82,3 +41,7 @@ used to test regex
 
 https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
 used for <a/> not to navigate
+
+Slack Help Channel. Abigail assistance and other team mates posts helped me.
+
+Learnt hooks useContext.
