@@ -7,9 +7,7 @@ import classes from './LoginPage.module.css';
 const adminUser = "admin";
 const adminPassword = "admin";
 
-// import ProductCard from '../components/ProductCard';
-
-const LoginPage = (props) => {
+const LoginPage = () => {
     const appCtx = useContext(AppContext);
     const nameRef = useRef("");
     const passwordRef = useRef("");
@@ -30,9 +28,7 @@ const LoginPage = (props) => {
             errorsFound = true;
         };
         if (!errorsFound) {
-            // props.setUser(nameRef.current.value);
             appCtx.setUser(nameRef.current.value);
-            // props.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
             appCtx.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
         };
         localStorage.setItem("user", nameRef.current.value);

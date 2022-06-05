@@ -1,15 +1,13 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Header.module.css';
 import AppContext from '../store/app-context';
 
-const Header = (props) => {
-    // const [filterTerm, setFilterTerm] = useState("");
+const Header = () => {
     const appCtx = useContext(AppContext);
     const filterTerm = useRef("");
     const filterHandler = () => {
         const searchTerm = filterTerm.current.value;
-        // const filteredProducts = props.productList.filter((product) => {
         let filteredProducts = [];
         if (searchTerm.length > 0) {
             filteredProducts = appCtx.originalProducts.filter((product) => {
@@ -19,14 +17,10 @@ const Header = (props) => {
         } else {
             filteredProducts = appCtx.products;
         }
-        
-        // props.setProducts(filteredProducts);
         appCtx.setProducts(filteredProducts);
     }
 
     const logoutHandler = () => {
-        // props.setUser(null);
-        // props.setIsAdmin(false);
         appCtx.setUser(null);
         appCtx.setIsAdmin(false);
         localStorage.removeItem("user");
@@ -39,13 +33,19 @@ const Header = (props) => {
             <div className='right menu'>
                 <div className={"ui mini icon input " + classes.smaller} >
                     <i className="search icon"></i>
-                    <input type="search" placeholder="Filter Name or Category" onChange={filterHandler} ref={filterTerm} />
+                    <input 
+                        type="search" 
+                        placeholder="Filter Name or Category" 
+                        onChange={filterHandler} 
+                        ref={filterTerm} />
                 </div>
                 <NavLink to='/products' className='item'>
                     Products
                 </NavLink>
                 <NavLink to='/shopping-cart' className='item'>
-                    Shopping Cart <i className="shopping cart icon"></i>{appCtx.cartItemsCount ? appCtx.cartItemsCount: null}
+                    Shopping Cart 
+                    <i className="shopping cart icon"></i>
+                    {appCtx.cartItemsCount ? appCtx.cartItemsCount: null}
                 </NavLink>
                 {appCtx.isAdmin &&
                 <NavLink to='/manage-store' className='item'>
@@ -55,10 +55,7 @@ const Header = (props) => {
                 {appCtx.user ?
                     <a href="#" className='ui item' onClick={logoutHandler}>
                         Logout
-                    </a> 
-                    // <NavLink to='#' className='item' onClick={logoutHandler}>
-                    //     Logout
-                    // </NavLink>
+                    </a>
                     :
                     <NavLink to='/login-page' className='item'>
                         Login

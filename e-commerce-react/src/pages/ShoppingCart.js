@@ -9,7 +9,7 @@ const zipPattern = /^[0-9]{5}$/;
 const cvvPattern = /^[0-9]{3}$/;
 const phonePattern = /^[0-9]{10}$/;
 
-const ShoppingCart = (props) => {
+const ShoppingCart = () => {
     const appCtx = useContext(AppContext);
     const nameRef = useRef("");
     const zipRef = useRef("");
@@ -121,20 +121,16 @@ const ShoppingCart = (props) => {
         }
 
         if (!errorsFound) {
-            // console.log("order submitted", name, zip, cardNumber, cvv);
             setCartSubmitted(true);
-            // props.clearCart([]);
             appCtx.clearCart([]);
         }
     };
 
     // make a copy of the cart
-    // const cartInfo = [...props.cart];
     const cartInfo = [...appCtx.cart];
 
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
-        // const itemInfo = props.productList.find((product) => product.id == cartItem.productId);
         const itemInfo = appCtx.products.find((product) => product.id == cartItem.productId);
         cartItem.name = itemInfo.title;
         cartItem.price = itemInfo.price;
@@ -152,16 +148,13 @@ const ShoppingCart = (props) => {
     const isEmptyCart = totalItems === 0;
 
     const reduceQuantityHandler = (id) => {
-        // props.updateCart(id, "decrement");
         appCtx.updateCart(id, "decrement");
     };
 
     const increaseQuantityHandler = (id) => {
-        // props.updateCart(id, "increment");
         appCtx.updateCart(id, "increment");
     };
 
-    // const itemRows = props.cart.map((item) => {
     const itemRows = appCtx.cart.map((item) => {
         if (item.quantity == 0) {
             return;

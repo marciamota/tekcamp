@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import AppContext from '../store/app-context';
-import classes from './ProductDetail.module.css';
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
     const appCtx = useContext(AppContext);
     const Params = useParams();
     const id = Params.id;
 
-    // const product = props.productList.find((singleProduct) => singleProduct.id == id);
     const product = appCtx.products.find((singleProduct) => singleProduct.id == id);
 
     const addToCartHandler = () => {
-        // props.updateCart(id, "increment");
         appCtx.updateCart(id, "increment");
     };
 
@@ -32,7 +29,11 @@ const ProductDetail = (props) => {
                 <p>Serial Number: {product.serial_number}</p>
                 <p>Manufacturer: {product.manufacturer}</p>
                 <p>Available: {product.available}</p>
-                <button className="ui basic button" onClick={addToCartHandler} disabled={product.available < 1}>
+                <button 
+                    className="ui basic button" 
+                    onClick={addToCartHandler} 
+                    disabled={product.available < 1}
+                >
                     <i className="shopping cart icon"></i>
                     {product.available < 1 ? "Sold out" : "Add to cart"}
                 </button>
