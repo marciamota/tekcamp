@@ -6,8 +6,9 @@ const pricePattern = /((\d+)((\.\d{1,2})?))$/;
 const quantityPattern = /^[1-9]\d*$/;
 const urlPattern = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
 
-const ManagePage = (props) => {
+const ManagePage = () => {
     const appCtx = useContext(AppContext);
+
     const productNameRef = useRef('');
     const serialRef = useRef('');
     const priceRef = useRef('');
@@ -28,7 +29,7 @@ const ManagePage = (props) => {
     const [editItemId, setEditItemId] = useState(null);
 
     const removeProductHandler = (id) => {
-        const updatedList = appCtx.products.filter((product) => product.id != id);
+        const updatedList = appCtx.originalProducts.filter((product) => product.id != id);
         appCtx.setOriginalProducts(updatedList);
         localStorage.setItem("products", JSON.stringify(updatedList));
     };
@@ -56,7 +57,7 @@ const ManagePage = (props) => {
         setEditMode(true);
         setEditItemId(id);
         clearFormErrors();
-        const productInfo = appCtx.products.find(product => product.id == id);
+        const productInfo = appCtx.originalProducts.find(product => product.id == id);
         productNameRef.current.value = productInfo.title;
         serialRef.current.value = productInfo.serial_number;
         priceRef.current.value = productInfo.price;
@@ -116,14 +117,14 @@ const ManagePage = (props) => {
                 available: quantityRef.current.value,
                 image: imageRef.current.value,
             };
-            const productListCopy = [...appCtx.products];
+            const productListCopy = [...appCtx.originalProducts];
             
             if (editMode) {
-                const itemInfoIndex = appCtx.products.findIndex((product) => product.id == editItemId);
+                const itemInfoIndex = appCtx.originalProducts.findIndex((product) => product.id == editItemId);
                 productListCopy[itemInfoIndex] = { ...productData };
             } else {
                 let newId = -1;
-                for (const product of appCtx.products) {
+                for (const product of appCtx.originalProducts) {
                     if (newId < +product.id) {
                         newId = +product.id;
                     };
@@ -137,7 +138,7 @@ const ManagePage = (props) => {
         }
     };
 
-    const itemRows = appCtx.products.map((product) => {
+    const itemRows = appCtx.originalProducts.map((product) => {
         return (
             <tr key={product.id}>
                 <td data-label="ID">
