@@ -35,7 +35,6 @@ const ShoppingCart = () => {
     const [shippingZipError, setShippingZipError] = useState(false);
     const [phoneError, setPhoneError] = useState(false);
 
-
     const submitOrderHandler = (e) => {
         e.preventDefault();
         const name = nameRef.current.value;

@@ -7,6 +7,8 @@ import AppContext from '../store/app-context';
 
 const ProductList = () => {
     const appCtx = useContext(AppContext);
+
+    // creates array of ProductCard
     const productCards = appCtx.products.map(
         (singleProduct) => <ProductCard key={singleProduct.id} data={singleProduct}/>
     );

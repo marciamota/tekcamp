@@ -48,6 +48,7 @@ const AppProvider = props => {
             setCartItemsCount(cartItemsCount + 1);
             setCart(cartCopy);
             localStorage.setItem("cart", JSON.stringify(cartCopy));
+            localStorage.setItem("products", JSON.stringify(originalProductsCopy));
         } else {
             // increase the availble quantity by 1
             originalProductsCopy[originalProductsIndex].available++;
@@ -56,6 +57,7 @@ const AppProvider = props => {
             setCartItemsCount(cartItemsCount - 1);
             setCart(cartCopy);
             localStorage.setItem("cart", JSON.stringify(cartCopy));
+            localStorage.setItem("products", JSON.stringify(originalProductsCopy));
         }
     };
 
