@@ -5,7 +5,7 @@ import classes from './ProductList.module.css';
 import ProductCard from '../components/ProductCard';
 import AppContext from '../store/app-context';
 
-const ProductList = (props) => {
+const ProductList = () => {
     const appCtx = useContext(AppContext);
     const productCards = appCtx.products.map(
         (singleProduct) => <ProductCard key={singleProduct.id} data={singleProduct}/>
