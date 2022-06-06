@@ -7,8 +7,8 @@ const AppProvider = props => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [originalProducts, setOriginalProducts] = useState([]);
-    const [products, setProducts] = useState([]);
+    const [originalProducts, setOriginalProducts] = useState([]); // full list of products (not filtered)
+    const [products, setProducts] = useState([]); // list of filtered products shown in the product list page
     const [cart, setCart] = useState([]);
     const [cartItemsCount, setCartItemsCount] = useState(0);
 
