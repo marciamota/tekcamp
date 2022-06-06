@@ -29,9 +29,9 @@ const LoginPage = () => {
         };
         if (!errorsFound) {
             appCtx.setUser(nameRef.current.value);
-            appCtx.setIsAdmin(nameRef.current.value == adminUser && passwordRef.current.value == adminPassword);
+            appCtx.setIsAdmin(nameRef.current.value === adminUser && passwordRef.current.value === adminPassword);
             localStorage.setItem("user", nameRef.current.value);
-            localStorage.setItem("isAdmin", (nameRef.current.value == adminUser && passwordRef.current.value == adminPassword));
+            localStorage.setItem("isAdmin", (nameRef.current.value === adminUser && passwordRef.current.value === adminPassword));
         };
     };
 

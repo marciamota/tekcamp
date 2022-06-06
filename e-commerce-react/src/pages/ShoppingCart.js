@@ -1,7 +1,6 @@
 import React, { Fragment, useRef, useState, useContext } from 'react';
 import classes from './ShoppingCart.module.css';
-import EmptyCart from '../components/EmptyCart';
-import CartSubmitted from '../components/CartSubmitted';
+import Message from '../components/Message';
 import AppContext from '../store/app-context';
 
 const cardPattern = /^[0-9]{16}$/;
@@ -133,7 +132,7 @@ const ShoppingCart = () => {
 
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
-        const itemInfo = appCtx.originalProducts.find((product) => product.id == cartItem.productId);
+        const itemInfo = appCtx.originalProducts.find((product) => +product.id === +cartItem.productId);
         if (itemInfo) {
             cartItem.name = itemInfo.title;
             cartItem.price = itemInfo.price;
@@ -160,7 +159,7 @@ const ShoppingCart = () => {
     };
 
     const itemRows = appCtx.cart.map((item) => {
-        if (item.quantity == 0) {
+        if (+item.quantity === 0) {
             return null;
         }
 
@@ -196,8 +195,8 @@ const ShoppingCart = () => {
 
     return (
         <Fragment>
-            {cartSubmitted ? <CartSubmitted /> :
-                isEmptyCart ? <EmptyCart /> :
+            {cartSubmitted ? <Message message="cart-submitted" /> :
+                isEmptyCart ? <Message message="empty-cart" /> :
                     <div className="ui two column stackable grid container">
                         <div className="column">
                             <table className="ui striped table">

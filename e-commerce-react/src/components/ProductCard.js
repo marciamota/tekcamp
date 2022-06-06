@@ -16,7 +16,7 @@ const ProductCard = (props) => {
             </div>
             <div className="content">
                 <Link 
-                    href="JavaScript:void(0);" 
+                    href="" 
                     className="header" 
                     to={'/products/' + props.data.id}
                 >

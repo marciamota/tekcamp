@@ -4,7 +4,7 @@ import classes from './ManagePage.module.css';
 
 const pricePattern = /((\d+)((\.\d{1,2})?))$/;
 const quantityPattern = /^[1-9]\d*$/;
-const urlPattern = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+const urlPattern = /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/ig;
 
 const ManagePage = () => {
     const appCtx = useContext(AppContext);
@@ -29,7 +29,7 @@ const ManagePage = () => {
     const [editItemId, setEditItemId] = useState(null);
 
     const removeProductHandler = (id) => {
-        const updatedList = appCtx.originalProducts.filter((product) => product.id != id);
+        const updatedList = appCtx.originalProducts.filter((product) => +product.id !== +id);
         appCtx.setOriginalProducts(updatedList);
         localStorage.setItem("products", JSON.stringify(updatedList));
     };
@@ -57,7 +57,7 @@ const ManagePage = () => {
         setEditMode(true);
         setEditItemId(id);
         clearFormErrors();
-        const productInfo = appCtx.originalProducts.find(product => product.id == id);
+        const productInfo = appCtx.originalProducts.find(product => +product.id === +id);
         productNameRef.current.value = productInfo.title;
         serialRef.current.value = productInfo.serial_number;
         priceRef.current.value = productInfo.price;
@@ -78,11 +78,11 @@ const ManagePage = () => {
         e.preventDefault();
         clearFormErrors();
         let errorsFound = false;
-        if (productNameRef.current.value.length == 0) {
+        if (productNameRef.current.value.length === 0) {
             setProductNameError(true);
             errorsFound = true;
         };
-        if (serialRef.current.value.length == 0) {
+        if (serialRef.current.value.length === 0) {
             setSerialError(true);
             errorsFound = true;
         };
@@ -90,11 +90,11 @@ const ManagePage = () => {
             setPriceError(true);
             errorsFound = true;
         };
-        if (manufacturerRef.current.value.length == 0) {
+        if (manufacturerRef.current.value.length === 0) {
             setManufacturerError(true);
             errorsFound = true;
         };
-        if (categoryRef.current.value.length == 0) {
+        if (categoryRef.current.value.length === 0) {
             setCategoryError(true);
             errorsFound = true;
         };
@@ -120,7 +120,7 @@ const ManagePage = () => {
             const productListCopy = [...appCtx.originalProducts];
             
             if (editMode) {
-                const itemInfoIndex = appCtx.originalProducts.findIndex((product) => product.id == editItemId);
+                const itemInfoIndex = appCtx.originalProducts.findIndex((product) => +product.id === +editItemId);
                 productListCopy[itemInfoIndex] = { ...productData };
             } else {
                 let newId = -1;
