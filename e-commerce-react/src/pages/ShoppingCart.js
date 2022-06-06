@@ -133,7 +133,7 @@ const ShoppingCart = () => {
 
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
-        const itemInfo = appCtx.products.find((product) => product.id == cartItem.productId);
+        const itemInfo = appCtx.originalProducts.find((product) => product.id == cartItem.productId);
         if (itemInfo) {
             cartItem.name = itemInfo.title;
             cartItem.price = itemInfo.price;
