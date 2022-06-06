@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import AppContext from "./app-context";
-import data from '../resources/products.json';
+import jsonData from '../resources/products.json';
 
 const AppProvider = props => {
     const firstRun = useRef(true);
@@ -68,9 +68,9 @@ const AppProvider = props => {
                 setOriginalProducts(savedData);
             } else {
                 // load from json file
-                setOriginalProducts(data);
+                setOriginalProducts(jsonData);
                 // save in local storage
-                localStorage.setItem("products", JSON.stringify(data));
+                localStorage.setItem("products", JSON.stringify(jsonData));
             }
             
             const userName = localStorage.getItem("user");
@@ -80,6 +80,7 @@ const AppProvider = props => {
                 setUser(userName);
                 setIsAdmin(isAdmin === "true")
             }
+            
             const cartStorage = JSON.parse(localStorage.getItem("cart"));
             if (cartStorage) {
                 // if there was cart info then retrieve its info

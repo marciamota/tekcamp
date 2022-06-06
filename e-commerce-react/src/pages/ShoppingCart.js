@@ -8,9 +8,11 @@ const cardPattern = /^[0-9]{16}$/;
 const zipPattern = /^[0-9]{5}$/;
 const cvvPattern = /^[0-9]{3}$/;
 const phonePattern = /^[0-9]{10}$/;
+const priceFormater = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
 const ShoppingCart = () => {
     const appCtx = useContext(AppContext);
+
     const nameRef = useRef("");
     const zipRef = useRef("");
     const cardNumberRef = useRef("");
@@ -84,7 +86,7 @@ const ShoppingCart = () => {
         } else {
             setshippingNameError(false);
         }
-        
+
         if (!address || address.length === 0) {
             setAddressError(true);
             errorsFound = true;
@@ -132,9 +134,11 @@ const ShoppingCart = () => {
     // complete cart info, add price and name
     for (let cartItem of cartInfo) {
         const itemInfo = appCtx.products.find((product) => product.id == cartItem.productId);
-        cartItem.name = itemInfo.title;
-        cartItem.price = itemInfo.price;
-        cartItem.available = itemInfo.available;
+        if (itemInfo) {
+            cartItem.name = itemInfo.title;
+            cartItem.price = itemInfo.price;
+            cartItem.available = itemInfo.available;
+        }
     };
 
     // calculate total price
@@ -157,7 +161,7 @@ const ShoppingCart = () => {
 
     const itemRows = appCtx.cart.map((item) => {
         if (item.quantity == 0) {
-            return;
+            return null;
         }
 
         return (
@@ -184,7 +188,7 @@ const ShoppingCart = () => {
                     </div>
                 </td>
                 <td data-label="PRICE">
-                    ${item.price}
+                    {priceFormater.format(item.quantity * item.price)}
                 </td>
             </tr>
         )
@@ -212,7 +216,7 @@ const ShoppingCart = () => {
                                         </td>
                                         <td data-label="QTY"></td>
                                         <td data-label="PRICE">
-                                            ${totalPrice}
+                                            {priceFormater.format(totalPrice)}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -241,7 +245,7 @@ const ShoppingCart = () => {
                                     <input type="text" placeholder="CVV" ref={cvvRef} />
                                     {cvvError && <p className={classes.errorMessage}>Enter a valid cvv</p>}
                                 </div>
-                                <hr/>
+                                <hr />
                                 <h1>Shipping Address</h1>
                                 <div className="field">
                                     <label>Full Name</label>

@@ -8,7 +8,7 @@ import AppContext from '../store/app-context';
 const ProductList = (props) => {
     const appCtx = useContext(AppContext);
     const productCards = appCtx.products.map(
-        (singleProduct) => <ProductCard key={singleProduct.id} data={singleProduct} updateCart={props.updateCart}/>
+        (singleProduct) => <ProductCard key={singleProduct.id} data={singleProduct}/>
     );
 
     return (

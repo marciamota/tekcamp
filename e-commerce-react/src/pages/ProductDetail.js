@@ -7,7 +7,7 @@ const ProductDetail = () => {
     const Params = useParams();
     const id = Params.id;
 
-    const product = appCtx.products.find((singleProduct) => singleProduct.id == id);
+    const product = appCtx.originalProducts.find((singleProduct) => singleProduct.id == id);
 
     const addToCartHandler = () => {
         appCtx.updateCart(id, "increment");

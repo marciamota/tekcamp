@@ -42,6 +42,9 @@ used to test regex
 https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
 used for <a/> not to navigate
 
+https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
+used for price formatting.
+
 Slack Help Channel. Abigail assistance and other team mates posts helped me.
 
 Learnt hooks useContext.
