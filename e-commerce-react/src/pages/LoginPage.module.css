@@ -1,0 +1,8 @@
+.containerWidth {
+    max-width: 500px;
+    margin: auto;
+}
+
+.errorMessage {
+    color: red;
+}
